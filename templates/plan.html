@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Stage 2: Sustainable Home Planner{% endblock %}
+
+{% block content %}
+<h2>Stage 2: Sustainable Home Planner</h2>
+<p class="text-muted">
+    Pick the home changes you'd actually commit to this year. Your plan is saved so you can
+    email it to yourself at the end.
+</p>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label for="budget" class="form-label fw-bold">Your budget</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" step="100" min="0" id="budget"
+                           class="form-control"
+                           value="{{ saved_plan.budget or 3000 }}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="fw-bold">Remaining</div>
+                <div id="remaining" class="fs-4">$0</div>
+            </div>
+            <div class="col-md-4">
+                <div class="fw-bold">CO<sub>2</sub> reduced</div>
+                <div id="co2-total" class="fs-4">0.00 T / year</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="items" data-preselected='{{ saved_plan.selected_item_ids | tojson }}'>
+    {% set rooms = [] %}
+    {% for it in items %}
+        {% if it.room not in rooms %}{% set _ = rooms.append(it.room) %}{% endif %}
+    {% endfor %}
+
+    {% for room in rooms %}
+        <h4 class="mt-4">{{ room }}</h4>
+        <div class="row g-3">
+            {% for it in items if it.room == room %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 planner-item"
+                         data-id="{{ it.id }}"
+                         data-cost="{{ it.cost }}"
+                         data-co2="{{ it.co2_tons }}">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input item-check"
+                                       type="checkbox"
+                                       id="check-{{ it.id }}">
+                                <label class="form-check-label fw-bold"
+                                       for="check-{{ it.id }}">
+                                    {{ it.name }}
+                                </label>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-light text-dark">{{ it.tag }}</span>
+                            </div>
+                            <div class="mt-2">
+                                <strong>
+                                    {% if it.cost == 0 %}FREE{% else %}${{ '{:,}'.format(it.cost) }}{% endif %}
+                                </strong>
+                                &middot;
+                                &minus;{{ '%.2f' | format(it.co2_tons) }}T CO<sub>2</sub>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+    <a href="{{ url_for('quiz', q_num=1) }}" class="btn btn-outline-secondary">← Back to quiz</a>
+    <div>
+        <button id="save-plan" class="btn btn-primary">Save plan</button>
+        <a href="{{ url_for('result') }}" class="btn btn-success">See results →</a>
+    </div>
+</div>
+
+<p id="save-status" class="text-muted text-end mt-2" role="status"></p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(function () {
+    function recompute() {
+        const budget = parseFloat($('#budget').val()) || 0;
+        let cost = 0;
+        let co2 = 0;
+
+        $('.planner-item').each(function () {
+            const $card = $(this);
+            if ($card.find('.item-check').is(':checked')) {
+                cost += parseFloat($card.data('cost')) || 0;
+                co2 += parseFloat($card.data('co2')) || 0;
+            }
+        });
+
+        const remaining = budget - cost;
+        const $remaining = $('#remaining');
+        $remaining.text('$' + remaining.toLocaleString());
+        $remaining.toggleClass('text-danger', remaining < 0);
+
+        $('#co2-total').text(co2.toFixed(2) + ' T / year');
+    }
+
+    // Restore previously saved selection
+    const preselected = $('#items').data('preselected') || [];
+    preselected.forEach(function (id) {
+        $('#check-' + $.escapeSelector(id)).prop('checked', true);
+    });
+
+    $('.item-check').on('change', recompute);
+    $('#budget').on('input', recompute);
+    recompute();
+
+    $('#save-plan').on('click', function () {
+        const selected = [];
+        $('.planner-item').each(function () {
+            const $card = $(this);
+            if ($card.find('.item-check').is(':checked')) {
+                selected.push($card.data('id'));
+            }
+        });
+
+        const payload = {
+            budget: parseInt($('#budget').val(), 10) || 0,
+            selected_item_ids: selected
+        };
+
+        $('#save-status').text('Saving…');
+        $.ajax({
+            url: '/plan/save',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(payload)
+        }).done(function () {
+            $('#save-status').text('Plan saved.');
+        }).fail(function () {
+            $('#save-status').text('Could not save plan. Please try again.');
+        });
+    });
+});
+</script>
+{% endblock %}

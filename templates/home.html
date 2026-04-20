@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Reducing Greenhouse Gas Emissions at Home{% endblock %}
+{% block body_class %}page-simple{% endblock %}
+
+{% block content %}
+<main class="hero">
+    <h1>Reducing Greenhouse Gas Emissions at Home</h1>
+    <p class="lead">
+        Every tonne of CO<sub>2</sub> emissions adds to global warming, while every tonne
+        avoided reduces future warming. Learn how to make decisions at home that reduce
+        your greenhouse gas emissions.
+    </p>
+
+    <form action="{{ url_for('start') }}" method="POST" class="start-form">
+        <button type="submit" class="btn-primary-lg">Start</button>
+    </form>
+
+    <nav class="hero-jump">
+        <a href="{{ url_for('learn', lesson_num=1) }}">Learn about sustainable living</a>
+        <span class="sep">·</span>
+        <a href="{{ url_for('quiz_planner') }}">Test yourself</a>
+    </nav>
+</main>
+{% endblock %}

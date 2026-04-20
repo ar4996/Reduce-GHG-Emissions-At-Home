@@ -1,0 +1,23 @@
+[
+  {"id": "cooktop",      "room": "Kitchen",     "name": "Induction Cooktop",          "cost": 1400, "impact": 0.64, "hint": "Eliminates gas combustion in the kitchen."},
+  {"id": "sealing",      "room": "Kitchen",     "name": "Professional Air Sealing",   "cost": 400,  "impact": 0.6,  "hint": "Stops heated/cooled air from leaking out."},
+  {"id": "unplug",       "room": "Kitchen",     "name": "Unplug Phantoms",            "cost": 0,    "impact": 0.15, "hint": "Devices draw power even when \"off.\""},
+  {"id": "fridge-temp",  "room": "Kitchen",     "name": "Optimize Fridge Temp",       "cost": 0,    "impact": 0.1,  "hint": "Slightly warmer = less energy, still safe."},
+  {"id": "draft-diy",    "room": "Kitchen",     "name": "DIY Door Draft Stopper",     "cost": 0,    "impact": 0.2,  "hint": "Cheap fix for one of the most common leaks."},
+
+  {"id": "leds",         "room": "Living Room", "name": "30 LED Bulbs",               "cost": 120,  "impact": 1.8,  "hint": "75% less energy than incandescent bulbs."},
+  {"id": "insulation",   "room": "Living Room", "name": "Attic Insulation",           "cost": 2200, "impact": 1.2,  "hint": "Roof is the biggest heat-loss point in most homes."},
+  {"id": "stat",         "room": "Living Room", "name": "Smart Thermostat",           "cost": 200,  "impact": 0.5,  "hint": "Adjusts automatically when you're away or asleep."},
+  {"id": "curtains",     "room": "Living Room", "name": "Curtain Management",         "cost": 0,    "impact": 0.25, "hint": "Thermal curtains reduce heat transfer through glass."},
+  {"id": "vent-clear",   "room": "Living Room", "name": "Clear Furniture from Vents", "cost": 0,    "impact": 0.15, "hint": "Blocked vents force the system to work harder."},
+
+  {"id": "hpwh",         "room": "Bathroom",    "name": "Heat Pump Water Heater",     "cost": 1800, "impact": 0.9,  "hint": "60% less electricity than a standard water heater."},
+  {"id": "temp",         "room": "Bathroom",    "name": "Lower Water Temp to 120F",   "cost": 0,    "impact": 0.2,  "hint": "Most heaters ship at 140°F — 120°F is safer and cheaper."},
+  {"id": "flow",         "room": "Bathroom",    "name": "Low-Flow Showerheads",       "cost": 60,   "impact": 0.15, "hint": "Less hot water used = less energy to heat it."},
+  {"id": "shower-timer", "room": "Bathroom",    "name": "5-Minute Shower Goal",       "cost": 0,    "impact": 0.1,  "hint": "Hot water is the real cost of long showers."},
+
+  {"id": "dry",          "room": "Laundry",     "name": "Air Drying Rack",            "cost": 0,    "impact": 1.0,  "hint": "Dryers are among the highest-energy appliances."},
+  {"id": "cold",         "room": "Laundry",     "name": "Cold Water Wash",            "cost": 0,    "impact": 0.1,  "hint": "90% of washing machine energy goes to heating water."},
+  {"id": "full-load",    "room": "Laundry",     "name": "Full Load Only",             "cost": 0,    "impact": 0.05, "hint": "Same energy use whether half-full or full."},
+  {"id": "lint",         "room": "Laundry",     "name": "Clean Lint Filter",          "cost": 0,    "impact": 0.02, "hint": "A clogged filter makes the dryer run longer."}
+]

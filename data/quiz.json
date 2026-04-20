@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Cooktop",
+    "prompt": "Which cooktop results in lower greenhouse gas emissions?",
+    "options": ["Gas", "Induction"],
+    "correct": "Induction",
+    "explanation": "Switching from a gas cooktop to an induction cooktop can cut stove-related emissions by ~640 kg CO2 per year."
+  },
+  {
+    "title": "Light Bulbs",
+    "prompt": "Which light bulb type results in lower greenhouse gas emissions?",
+    "options": ["Incandescent", "LED"],
+    "correct": "LED",
+    "explanation": "Replacing 30 incandescent bulbs with 30 LED lamps reduces emissions by ~1,800 kg CO2 per year."
+  },
+  {
+    "title": "Water Heater",
+    "prompt": "Which water heater results in lower greenhouse gas emissions?",
+    "options": ["Gas", "Heat Pump"],
+    "correct": "Heat Pump",
+    "explanation": "Switching from a gas water heater to a heat pump water heater reduces emissions by ~900 kg CO2 per year."
+  },
+  {
+    "title": "Drying",
+    "prompt": "Which drying method results in lower greenhouse gas emissions?",
+    "options": ["Dryer", "Air Dry"],
+    "correct": "Air Dry",
+    "explanation": "Switching from a dryer to air drying reduces emissions by ~1,000 kg CO2 per year."
+  }
+]
