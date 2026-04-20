@@ -78,6 +78,83 @@
 .result-card h2 { margin-top: 0; font-size: 1.3rem; }
 .muted { color: #636E72; }
 
+.lesson-kicker {
+    display: inline-block;
+    background: var(--room-peach);
+    color: #4A3C2A;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 5px 12px;
+    margin-bottom: 10px;
+}
+
+.lesson-summary {
+    color: #4f555a;
+    line-height: 1.65;
+    margin-bottom: 16px;
+}
+
+.lesson-image {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border-gray);
+    margin: 6px 0 18px;
+}
+
+.lesson-highlight {
+    background: #F1FBF4;
+    border: 1px solid #D5F3DF;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+}
+
+.lesson-highlight h2,
+.lesson-steps h2 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.lesson-highlight p {
+    margin: 0;
+    line-height: 1.55;
+}
+
+.lesson-meta {
+    margin-top: 8px !important;
+    color: #3E6C55;
+    font-size: 0.88rem;
+}
+
+.lesson-steps {
+    margin: 4px 0 6px;
+}
+
+.lesson-steps ol {
+    margin: 0;
+    padding-left: 20px;
+    color: #454B50;
+    line-height: 1.6;
+}
+
+.lesson-steps li {
+    margin-bottom: 6px;
+}
+
+.lesson-tip {
+    background: #FFF8E1;
+    border-left: 4px solid #F39C12;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 12px;
+    margin: 16px 0 0;
+    color: #7D4E00;
+    font-size: 0.9rem;
+}
+
 .stub-notice {
     background: #FEF9E7;
     border-left: 4px solid #F39C12;

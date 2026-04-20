@@ -10,11 +10,49 @@
     </header>
 
     <section class="lesson-card">
-        <h1>Placeholder</h1>
-        <p class="stub-notice">
-            Learning section — owned by Avi and Ankit. This page is a placeholder
-            so the full click-through works end-to-end.
-        </p>
+        <div class="lesson-kicker">{{ lesson.icon }} {{ lesson.room }}</div>
+        <h1>{{ lesson.title }}</h1>
+        <p class="lesson-summary">{{ lesson.summary }}</p>
+
+        {% if lesson.image %}
+            <img
+                src="{{ lesson.image }}"
+                alt="{{ lesson.room }} sustainability opportunity"
+                class="lesson-image"
+            >
+        {% endif %}
+
+        {% if lesson.impact_text %}
+            <div class="lesson-highlight">
+                <h2>Estimated Impact</h2>
+                <p>{{ lesson.impact_text }}</p>
+                {% if lesson.cost_effectiveness %}
+                    <p class="lesson-meta">Cost-effectiveness: <strong>{{ lesson.cost_effectiveness }}</strong></p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if lesson.steps %}
+            <div class="lesson-steps">
+                <h2>How to Start</h2>
+                <ol>
+                    {% for step in lesson.steps %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endif %}
+
+        {% if lesson.tip %}
+            <p class="lesson-tip">💡 {{ lesson.tip }}</p>
+        {% endif %}
+
+        {% if not lesson.impact_text and not lesson.steps %}
+            <p class="stub-notice">
+                This lesson is still a placeholder. You can continue to the next room,
+                and we can fill in this content in the same format as Lesson 1.
+            </p>
+        {% endif %}
     </section>
 
     <nav class="page-nav">
