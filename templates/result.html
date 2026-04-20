@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Your Results{% endblock %}
+
+{% block content %}
+<h2>Your Results</h2>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h4 class="card-title">Quiz Score</h4>
+        <p class="display-6 mb-2">{{ correct }} / {{ total }}</p>
+        <ul class="list-unstyled mb-0">
+            {% for d in details %}
+                <li class="mb-2">
+                    {% if d.is_correct %}
+                        <span class="text-success">✓</span>
+                    {% else %}
+                        <span class="text-danger">✗</span>
+                    {% endif %}
+                    <strong>{{ d.title }}:</strong>
+                    you chose <em>{{ d.user_answer or '(no answer)' }}</em>
+                    {% if not d.is_correct %}
+                        &nbsp;· correct answer: <strong>{{ d.correct_answer }}</strong>
+                    {% endif %}
+                    {% if d.explanation %}
+                        <div class="small text-muted">{{ d.explanation }}</div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h4 class="card-title">Your Plan</h4>
+
+        {% if not selected_items %}
+            <p class="text-muted mb-0">
+                You haven't saved any items yet.
+                <a href="{{ url_for('plan') }}">Go to the planner</a>.
+            </p>
+        {% else %}
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="text-muted small">Budget</div>
+                    <div class="fs-5">${{ '{:,}'.format(plan_budget) }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-muted small">Plan total cost</div>
+                    <div class="fs-5">${{ '{:,}'.format(plan_total_cost) }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-muted small">Est. CO<sub>2</sub> reduced</div>
+                    <div class="fs-5">{{ '%.2f' | format(plan_total_co2) }} T / year</div>
+                </div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for it in selected_items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <span class="badge bg-secondary me-2">{{ it.room }}</span>
+                            {{ it.name }}
+                        </span>
+                        <span class="text-muted">
+                            {% if it.cost == 0 %}FREE{% else %}${{ '{:,}'.format(it.cost) }}{% endif %}
+                            &middot;
+                            &minus;{{ '%.2f' | format(it.co2_tons) }}T CO<sub>2</sub>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h4 class="card-title">Keep your plan</h4>
+        <p class="text-muted">
+            Your plan is saved on the server. You can also email it to yourself — clicking
+            the button below opens your mail app with your plan pre-filled. Just enter your
+            own email address.
+        </p>
+
+        <a id="email-plan-btn" class="btn btn-primary" href="#">📧 Email me this plan</a>
+        <a class="btn btn-outline-secondary" href="{{ url_for('plan_summary') }}" target="_blank">
+            View as plain text
+        </a>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+    <a href="{{ url_for('plan') }}" class="btn btn-outline-secondary">← Edit plan</a>
+    <a href="{{ url_for('home') }}" class="btn btn-success">Back to home</a>
+</div>
+
+<!-- Plain-text plan body, rendered by Jinja, read by JS for the mailto: link. -->
+<script id="plan-summary-text" type="text/plain">{{ plan_summary_text }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(function () {
+    $('#email-plan-btn').on('click', function (e) {
+        e.preventDefault();
+        const body = document.getElementById('plan-summary-text').textContent;
+        const subject = 'My Home Emissions Reduction Plan';
+        const mailto = 'mailto:?subject=' + encodeURIComponent(subject) +
+                       '&body=' + encodeURIComponent(body);
+        window.location.href = mailto;
+    });
+});
+</script>
+{% endblock %}

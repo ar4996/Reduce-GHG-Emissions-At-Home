@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Per-user runtime state (single-user app; not meant to be checked in)
+user_data.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store

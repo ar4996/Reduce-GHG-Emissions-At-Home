@@ -1,0 +1,6 @@
+[
+  {"key": "Kitchen",     "name": "Kitchen",      "icon": "🍳", "color": "#FFD6A5"},
+  {"key": "Living Room", "name": "Living Room",  "icon": "🛋", "color": "#A2D2FF"},
+  {"key": "Bathroom",    "name": "Bathroom",     "icon": "🚿", "color": "#FFC8DD"},
+  {"key": "Laundry",     "name": "Laundry Room", "icon": "🧺", "color": "#D0F0C0"}
+]

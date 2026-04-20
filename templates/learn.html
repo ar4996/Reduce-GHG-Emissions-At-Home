@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Placeholder — Lesson {{ lesson_num }}{% endblock %}
+{% block body_class %}page-simple{% endblock %}
+
+{% block content %}
+<main class="simple-container">
+    <header class="simple-header">
+        <a href="{{ url_for('home') }}" class="back-link">← Home</a>
+        <span class="lesson-counter">Lesson {{ lesson_num }} / {{ total }}</span>
+    </header>
+
+    <section class="lesson-card">
+        <h1>Placeholder</h1>
+        <p class="stub-notice">
+            Learning section — owned by Avi and Ankit. This page is a placeholder
+            so the full click-through works end-to-end.
+        </p>
+    </section>
+
+    <nav class="page-nav">
+        {% if lesson_num > 1 %}
+            <a href="{{ url_for('learn', lesson_num=lesson_num-1) }}" class="btn-secondary">← Previous</a>
+        {% else %}
+            <a href="{{ url_for('home') }}" class="btn-secondary">← Home</a>
+        {% endif %}
+
+        {% if lesson_num < total %}
+            <a href="{{ url_for('learn', lesson_num=lesson_num+1) }}" class="btn-primary">Next →</a>
+        {% else %}
+            <a href="{{ url_for('quiz_planner') }}" class="btn-primary">Start the planner →</a>
+        {% endif %}
+    </nav>
+</main>
+{% endblock %}

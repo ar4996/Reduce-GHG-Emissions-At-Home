@@ -1,0 +1,6 @@
+[
+  {"room": "Kitchen",      "icon": "🍳", "title": "Cooktops",     "summary": "Stub — Avi/Ankit to build the real learning content here."},
+  {"room": "Living Room",  "icon": "🛋", "title": "Light Bulbs",  "summary": "Stub — Avi/Ankit to build the real learning content here."},
+  {"room": "Bathroom",     "icon": "🚿", "title": "Water Heater", "summary": "Stub — Avi/Ankit to build the real learning content here."},
+  {"room": "Laundry Room", "icon": "🧺", "title": "Drying",       "summary": "Stub — Avi/Ankit to build the real learning content here."}
+]
