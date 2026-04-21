@@ -24,7 +24,7 @@ $(document).ready(function() {
         clickedOnce = true;
     } else {
         if (next_index === null) {
-          window.location.href = "/quiz/1";
+          window.location.href = "/quiz/binary";
         } else {
           window.location.href = "/learn/" + next_index;
         }
