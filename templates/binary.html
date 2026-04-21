@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Quiz{% endblock %}
+{% block body_class %}page-simple{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/binary.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="simple-container">
+    <header class="simple-header">
+        <a href="{{ url_for('home') }}" class="back-link">← Home</a>
+        <a id="to-planner-link" class="btn-primary nav-hidden" href="{{ url_for('quiz_planner') }}">
+            Go to Planner →
+        </a>
+    </header>
+
+    <h1>Which option lowers emissions?</h1>
+    <p class="muted">
+        Pick one option in every row, then hit Submit. Get them all right to
+        unlock the planner.
+    </p>
+
+    <div id="rows" class="v2-rows"></div>
+
+    <div class="v2-controls">
+        <button id="submit-btn" class="btn-primary" disabled>Submit</button>
+        <p id="submit-hint" class="muted">Make a choice in every row to activate submit.</p>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.BINARY_QUESTIONS = {{ questions | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/binary.js') }}"></script>
+{% endblock %}
