@@ -1,47 +1,38 @@
 [
   {
     "room": "Kitchen",
-    "icon": "🍳",
-    "title": "Cooktops",
-    "summary": "Switching from a gas cooktop to an induction cooktop can significantly reduce home emissions and improve indoor air quality.",
-    "image": "https://t4.ftcdn.net/jpg/01/97/62/75/360_F_197627587_9W7ar7XOEv2586rWWbkHL1GqeZmMlv6l.jpg",
-    "impact_kg": 640,
-    "impact_text": "This can cut stove-related carbon emissions by ~640 kg CO₂ every year.",
-    "cost_effectiveness": "Low",
-    "steps": [
-      "Check if your current cookware is induction-compatible (a magnet should stick to the bottom).",
-      "Compare induction cooktop options in your budget range.",
-      "Look for local utility rebates or state incentives before purchasing."
-    ],
-    "tip": "If a full replacement is expensive, a portable induction burner is a lower-cost first step."
+    "room_image": "https://t4.ftcdn.net/jpg/01/97/62/75/360_F_197627587_9W7ar7XOEv2586rWWbkHL1GqeZmMlv6l.jpg",
+    "opportunity": "Cooktops",
+    "description": "Switching from a gas cooktop to an induction cooktop",
+    "impact": "This can cut stove-related carbon emissions by ~640 kg CO₂ every year.",
+    "impact_cost_effectiveness": "Low",
+    "next_room": "Living Room"
   },
   {
     "room": "Living Room",
-    "icon": "🛋",
-    "title": "Light Bulbs",
-    "summary": "Replacing incandescent bulbs with LEDs is one of the easiest high-impact upgrades you can make at home.",
-    "image": "https://www.shutterstock.com/image-vector/cartoon-room-interior-home-furniture-600nw-2423784435.jpg",
-    "impact_kg": 1800,
-    "impact_text": "Replacing 30 incandescent bulbs with 30 LED bulbs can reduce emissions by ~1,800 kg CO₂ every year.",
-    "cost_effectiveness": "High",
-    "steps": [
-      "Count the bulbs in high-use areas (living room, kitchen, hallways).",
-      "Prioritize replacing incandescent or halogen bulbs first.",
-      "Choose LED bulbs with the brightness and color temperature you prefer.",
-      "Replace bulbs gradually room by room if needed to spread out cost."
-    ],
-    "tip": "Look for ENERGY STAR LEDs and multi-pack discounts to lower upfront cost."
+    "room_image": "https://www.shutterstock.com/image-vector/cartoon-room-interior-home-furniture-600nw-2423784435.jpg",
+    "opportunity": "Light Bulbs",
+    "description": "Replace 30 incandescent light bulbs with 30 LED lamps (in your living room or elsewhere at home)",
+    "impact": "You'll reduce emissions by ~1,800 kg CO₂ every year.",
+    "impact_cost_effectiveness": "High",
+    "next_room": "Bathroom"
   },
   {
     "room": "Bathroom",
-    "icon": "🚿",
-    "title": "Water Heater",
-    "summary": "Stub — Avi/Ankit to build the real learning content here."
+    "room_image": "https://previews.123rf.com/images/fivestarspro/fivestarspro2002/fivestarspro200200532/140313863-team-of-plumbers-install-water-heater-in-bathroom-housewife-watching-working-process-workers-set.jpg",
+    "opportunity": "Water Heater",
+    "description": "Switching from a gas water heater to a heat pump water heater",
+    "impact": "You'll reduce emissions by ~900 kg CO₂ every year.",
+    "impact_cost_effectiveness": "Low",
+    "next_room": "Laundry Room"
   },
   {
     "room": "Laundry Room",
-    "icon": "🧺",
-    "title": "Drying",
-    "summary": "Stub — Avi/Ankit to build the real learning content here."
+    "room_image": "https://t3.ftcdn.net/jpg/05/04/07/54/360_F_504075455_3kjvzfg4bia9TGxanaMiZl118REf6XyW.jpg",
+    "opportunity": "Drying",
+    "description": "Switching from using a dryer to air drying",
+    "impact": "You'll reduce emissions by ~1,000 kg CO₂ every year",
+    "impact_cost_effectiveness": "High",
+    "next_room": "Congrats on finishing!"
   }
 ]

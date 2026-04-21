@@ -51,6 +51,9 @@ def load_json(filename):
         return json.load(f)
 
 
+sustainable_living_opportunities = load_json("lessons.json")
+
+
 def load_user_data():
     if os.path.exists(USER_DATA_FILE):
         with open(USER_DATA_FILE, "r") as f:
@@ -108,34 +111,46 @@ def home():
     return render_template("home.html")
 
 
+@app.route('/learn/index')
+def learn_index():
+    return render_template('lesson-welcome.html')
+
+
+@app.route('/lesson-welcome')
+def lesson_welcome():
+    return redirect(url_for('learn_index'))
+
+
+@app.route('/learn/<int:index>')
+def lesson_page(index):
+    if index < 0 or index >= len(sustainable_living_opportunities):
+                return redirect(url_for('lesson_welcome'))
+
+    user_data = load_user_data()
+    user_data["learning"].append({
+                "lesson_num": index + 1,
+        "entered_at": datetime.now().isoformat(),
+    })
+    save_user_data(user_data)
+
+    current_room = sustainable_living_opportunities[index]
+    next_index = index + 1 if index + 1 < len(sustainable_living_opportunities) else None
+    prev_index = index - 1 if index > 0 else None
+
+    return render_template(
+            "lesson.html",
+            room_data=current_room,
+            next_index=next_index,
+            prev_index=prev_index
+    )
+
+
 @app.route("/start", methods=["POST"])
 def start():
     state = _empty_state()
     state["started_at"] = datetime.now().isoformat()
     save_user_data(state)
-    # Flow goes through the learning section first (Avi/Ankit's placeholders).
-    return redirect(url_for("learn", lesson_num=1))
-
-
-@app.route("/learn/<int:lesson_num>")
-def learn(lesson_num):
-    lessons = load_json("lessons.json")
-    if lesson_num < 1 or lesson_num > len(lessons):
-        return redirect(url_for("home"))
-
-    user_data = load_user_data()
-    user_data["learning"].append({
-        "lesson_num": lesson_num,
-        "entered_at": datetime.now().isoformat(),
-    })
-    save_user_data(user_data)
-
-    return render_template(
-        "learn.html",
-        lesson=lessons[lesson_num - 1],
-        lesson_num=lesson_num,
-        total=len(lessons),
-    )
+    return redirect(url_for('learn_index'))
 
 
 @app.route("/quiz/1")

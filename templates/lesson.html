@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{room_data.room_image}}" class="img-fluid">
+        </div>
+        <div class="col-md-4">
+            <p class="centertext lesson-opportunity">Opportunity: {{room_data.opportunity}}</p>
+            <p>{{room_data.description}}</p>
+            <div class="impact-opportunity mb-3">
+                <div class="lesson-buttons">
+                    <button id="impact-btn" class="btn btn-primary">Show Impact</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script id="impact-data" type="application/json">
+  {{ room_data.impact | tojson }}
+</script>
+
+<script>
+  var impact_text = JSON.parse(
+    document.getElementById("impact-data").textContent
+  );
+</script>
+
+<script id="next-room" type="application/json">
+  {{ room_data.next_room | tojson }}
+</script>
+
+<script>
+  var next_room = JSON.parse(
+    document.getElementById("next-room").textContent
+  );
+</script>
+
+<script id="next-index" type="application/json">
+  {{ next_index | tojson }}
+</script>
+
+<script>
+  var next_index = JSON.parse(
+    document.getElementById("next-index").textContent
+  );
+</script>
+
+<script src="{{ url_for('static', filename='js/lesson.js') }}"></script>
+{% endblock %}
