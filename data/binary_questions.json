@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cooktop",
+    "title": "Cooktop",
+    "options": ["Gas", "Induction"],
+    "correct": "Induction"
+  },
+  {
+    "id": "bulbs",
+    "title": "Light Bulbs",
+    "options": ["Incandescent", "LED"],
+    "correct": "LED"
+  },
+  {
+    "id": "water_heater",
+    "title": "Water Heater",
+    "options": ["Gas", "Heat Pump"],
+    "correct": "Heat Pump"
+  },
+  {
+    "id": "drying",
+    "title": "Drying",
+    "options": ["Dryer", "Air Dry"],
+    "correct": "Air Dry"
+  }
+]
