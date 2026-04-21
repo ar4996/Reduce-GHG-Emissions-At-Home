@@ -70,6 +70,14 @@ def items_by_id():
     return {it["id"]: it for it in load_json("planner_items.json")}
 
 
+# ADDED FOR BINARY QUIZ — strips correct answers before sending to client
+def binary_questions_for_client():
+    return [
+        {k: v for k, v in q.items() if k != "correct"}
+        for q in load_json("binary_questions.json")
+    ]
+
+
 def build_plan_summary(user_data):
     """Plain-text plan summary for /api/plan/summary (debugging / inspection)."""
     items_map = items_by_id()
@@ -153,6 +161,12 @@ def start():
     return redirect(url_for('learn_index'))
 
 
+# ADDED FOR BINARY QUIZ — serves templates/binary.html
+@app.route("/quiz/binary")
+def quiz_binary():
+    return render_template("binary.html", questions=binary_questions_for_client())
+
+
 @app.route("/quiz/1")
 def quiz_planner():
     return render_template(
@@ -212,6 +226,32 @@ def api_remove_item(item_id):
 @app.route("/api/plan/summary")
 def api_plan_summary():
     return Response(build_plan_summary(load_user_data()), mimetype="text/plain")
+
+
+# ADDED FOR BINARY QUIZ — server-side all-or-nothing correctness check
+@app.route("/api/binary", methods=["POST"])
+def api_binary():
+    payload = request.get_json(silent=True) or {}
+    submission = payload.get("submission")
+    if not isinstance(submission, list):
+        abort(400, "submission (list) required")
+
+    answer_key = {q["id"]: q["correct"] for q in load_json("binary_questions.json")}
+    submitted = {s.get("question_id"): s.get("answer") for s in submission}
+
+    all_correct = (
+        len(submitted) == len(answer_key)
+        and all(answer_key.get(qid) == ans for qid, ans in submitted.items())
+    )
+
+    user_data = load_user_data()
+    user_data["binary"] = {
+        "submitted_at": datetime.now().isoformat(),
+        "submission": submission,
+        "all_correct": all_correct,
+    }
+    save_user_data(user_data)
+    return jsonify({"all_correct": all_correct})
 
 
 if __name__ == "__main__":
