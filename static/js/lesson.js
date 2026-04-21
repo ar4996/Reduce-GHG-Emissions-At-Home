@@ -9,12 +9,12 @@ $(document).ready(function() {
         
         const impactDiv = $(".impact-opportunity");
 
-        impactDiv.prepend("<p>" + impact_text + "</p>");
+        impactDiv.prepend("<p>" + impact_text + "</p>" + "<p> Emissions Impact Cost Effectiveness: " + cost_effectiveness + "</p>");
 
         if (next_index === null) {
             $(this).text("Congrats on finishing. Test yourself!");
         } else {
-          $(this).text("Go to the " + next_room);
+        $(this).text("Go to the " + next_room);
         }
 
         $(this)

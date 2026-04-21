@@ -1,18 +1,23 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
   <div class="container mt-4">
+    
+    <div class="lesson-progress">
+        <div class="lesson-step {% if current_index == 0 %}active{% endif %}">Kitchen</div>
+        <div class="lesson-step {% if current_index == 1 %}active{% endif %}">Living Room</div>
+        <div class="lesson-step {% if current_index == 2 %}active{% endif %}">Bathroom</div>
+        <div class="lesson-step {% if current_index == 3 %}active{% endif %}">Laundry Room</div>
+    </div>
     <div class="row">
         <div class="col-md-8">
             <img src="{{room_data.room_image}}" class="img-fluid">
         </div>
-        <div class="col-md-4">
-            <p class="centertext lesson-opportunity">Opportunity: {{room_data.opportunity}}</p>
+        <div class="col-md-4 centertext">
+            <p class="lesson-opportunity">Opportunity: {{room_data.opportunity}}</p>
             <p>{{room_data.description}}</p>
             <div class="impact-opportunity mb-3">
-                <div class="lesson-buttons">
-                    <button id="impact-btn" class="btn btn-primary">Show Impact</button>
-                </div>
+                <button id="impact-btn" class="btn btn-primary">Show Impact</button>
             </div>
         </div>
 </div>
@@ -48,6 +53,16 @@
 <script>
   var next_index = JSON.parse(
     document.getElementById("next-index").textContent
+  );
+</script>
+
+<script id="cost-effectiveness" type="application/json">
+  {{ room_data.impact_cost_effectiveness | tojson }}
+</script>
+
+<script>
+  var cost_effectiveness = JSON.parse(
+    document.getElementById("cost-effectiveness").textContent
   );
 </script>
 

@@ -135,13 +135,13 @@ def lesson_page(index):
 
     current_room = sustainable_living_opportunities[index]
     next_index = index + 1 if index + 1 < len(sustainable_living_opportunities) else None
-    prev_index = index - 1 if index > 0 else None
 
     return render_template(
             "lesson.html",
             room_data=current_room,
+            current_index=index,
             next_index=next_index,
-            prev_index=prev_index
+            # prev_index=prev_index
     )
 
 
