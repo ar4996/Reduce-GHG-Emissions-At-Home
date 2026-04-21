@@ -1,0 +1,105 @@
+/* ============================================================
+   Stage 1 Quiz — Version 2 (slide-14 grid)
+   One row per opportunity. Two option buttons side-by-side.
+   No per-row feedback.
+   ============================================================ */
+.v2-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0;
+}
+
+.v2-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 16px;
+    background: white;
+    border: 1.5px solid var(--border-gray);
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.15s, background 0.15s;
+}
+.v2-row.has-choice { border-color: var(--nav-blue); }
+
+.v2-row-title {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.v2-opt {
+    background: white;
+    border: 1.5px solid var(--border-gray);
+    border-radius: 10px;
+    padding: 12px 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.v2-opt:hover:not(:disabled) {
+    border-color: var(--nav-blue);
+    background: #F0F8FF;
+}
+.v2-opt.is-chosen {
+    background: var(--nav-blue);
+    border-color: #5DADE2;
+}
+.v2-row.is-locked .v2-opt { cursor: default; }
+.v2-row.is-locked .v2-opt.is-chosen {
+    background: var(--accent-green);
+    border-color: var(--accent-dark);
+    color: white;
+}
+.v2-row.is-locked .v2-opt:not(.is-chosen) { opacity: 0.45; }
+
+.v2-controls { text-align: center; margin-top: 20px; }
+.v2-controls .btn-primary {
+    min-width: 200px;
+    padding: 12px 30px;
+}
+.v2-controls .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(30%);
+}
+.v2-controls .btn-primary:not(:disabled) {
+    animation: v2-pulse 1.8s ease-in-out infinite;
+}
+@keyframes v2-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+    50%      { box-shadow: 0 0 0 12px rgba(46, 204, 113, 0); }
+}
+
+#submit-hint { margin-top: 10px; min-height: 1.2em; }
+#submit-hint.is-error { color: var(--rita-red); font-weight: 700; }
+
+/* "Go to Planner →" link in the nav bar, hidden until unlock. */
+.nav-hidden { display: none !important; }
+
+/* Wrong-answer shake on the rows container. */
+.v2-rows.shake { animation: v2-shake 0.55s ease; }
+@keyframes v2-shake {
+    0%, 100% { transform: translateX(0); }
+    15%      { transform: translateX(-10px); }
+    30%      { transform: translateX(9px); }
+    45%      { transform: translateX(-7px); }
+    60%      { transform: translateX(5px); }
+    75%      { transform: translateX(-3px); }
+}
+.v2-rows.shake .v2-row {
+    border-color: var(--rita-red);
+    background: #FDEDEC;
+    transition: none;
+}
+
+@media (max-width: 640px) {
+    .v2-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
