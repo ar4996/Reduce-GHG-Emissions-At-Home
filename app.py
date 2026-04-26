@@ -36,6 +36,7 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 USER_DATA_FILE = os.path.join(BASE_DIR, "user_data.json")
+FILE_ENCODING = "utf-8"
 
 
 def _empty_state():
@@ -47,7 +48,7 @@ def _empty_state():
 
 
 def load_json(filename):
-    with open(os.path.join(DATA_DIR, filename), "r") as f:
+    with open(os.path.join(DATA_DIR, filename), "r", encoding=FILE_ENCODING) as f:
         return json.load(f)
 
 
@@ -56,14 +57,14 @@ sustainable_living_opportunities = load_json("lessons.json")
 
 def load_user_data():
     if os.path.exists(USER_DATA_FILE):
-        with open(USER_DATA_FILE, "r") as f:
+        with open(USER_DATA_FILE, "r", encoding=FILE_ENCODING) as f:
             return json.load(f)
     return _empty_state()
 
 
 def save_user_data(data):
-    with open(USER_DATA_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+    with open(USER_DATA_FILE, "w", encoding=FILE_ENCODING) as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 def items_by_id():
