@@ -33,7 +33,8 @@ body.page-planner {
     z-index: 2000;
     padding: 104px 24px 32px;
     box-sizing: border-box;
-    background: rgba(217, 234, 211, 0.84);
+    background: rgba(196, 222, 184, 0.92);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     overflow: auto;
 }
@@ -51,12 +52,13 @@ body.page-planner {
 
 .planner-setup-card,
 .planner-congrats-card {
-    width: min(1080px, 100%);
+    width: min(640px, 100%);
     padding: 32px;
     border: none;
     border-radius: 30px;
     background: transparent;
     box-shadow: none;
+    text-align: center;
 }
 
 .planner-stage-banner {
