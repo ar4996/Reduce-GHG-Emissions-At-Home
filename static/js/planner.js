@@ -363,6 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedPlan.budget) {
         restoreFromBackend(savedPlan);
     } else {
-        render();
+        setRoom(roomList[0], roomColors[roomList[0]]);
     }
 });
