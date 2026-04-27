@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <p class="centertext title">Sustainable Living</p>
+    <p class="centertext dark-grey">Every tonne of CO₂ emissions adds to global warming, while every tonne avoided reduces future warming.</p>
+    <p class="centertext dark-grey">Learn how to make decisions at home that will reduce your greenhouse gas emissions!</p>
+    <img class="houseimg" src="https://static.vecteezy.com/system/resources/thumbnails/005/991/386/small/house-model-from-inside-detailed-interiors-with-furniture-and-decor-in-flat-style-big-house-in-cut-cottage-cutaway-with-interiors-of-bedroom-living-room-kitchen-dining-bathroom-nursery-vector.jpg" alt="House Image">
+    <div class="welcome-buttons">
+      <a href="{{ url_for('lesson_welcome') }}" class="btn btn-primary welcome-button-width">Learn About Sustainable Living</a>
+      <a href="{{ url_for('quiz_binary') }}" class="btn btn-secondary welcome-button-width">Test Your Knowledge</a>
+    </div>
+  </div>
+   
+{% endblock %}
