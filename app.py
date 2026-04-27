@@ -122,7 +122,7 @@ def build_plan_summary(user_data):
 # ==================== PAGE ROUTES ====================
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("welcome.html")
 
 
 @app.route('/learn/index')
