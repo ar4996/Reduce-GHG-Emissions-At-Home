@@ -1,32 +1,64 @@
 {% extends "base.html" %}
-{% block title %}Quiz{% endblock %}
-{% block body_class %}page-simple{% endblock %}
+{% block title %}Emission Quiz{% endblock %}
+{% block body_class %}page-simple binary-page{% endblock %}
 
 {% block head_extra %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/binary.css') }}">
 {% endblock %}
 
 {% block content %}
-<main class="simple-container">
-    <header class="simple-header">
-        <a href="{{ url_for('home') }}" class="back-link">← Home</a>
-        <a id="to-planner-link" class="btn-primary nav-hidden" href="{{ url_for('quiz_planner') }}">
-            Go to Planner →
-        </a>
-    </header>
+<main class="simple-container binary-shell">
+    <section class="binary-hero">
+        <div class="binary-kicker">
+            <span class="binary-kicker-label"></span>
+            <strong>Stage 1</strong>
+        </div>
+        <div class="binary-hero-grid">
+            <div>
+                <h1>Which option lowers emissions?</h1>
+                <p class="binary-lead">
+                    Pick the lower-emission option in every comparison, then submit one
+                    complete set of answers. A perfect score unlocks the planner.
+                </p>
+            </div>
 
-    <h1>Which option lowers emissions?</h1>
-    <p class="muted">
-        Pick one option in every row, then hit Submit. Get them all right to
-        unlock the planner.
-    </p>
+            <aside class="binary-status-card" aria-label="Unlock condition">
+                <span class="binary-status-label">Unlock condition</span>
+                <strong>All {{ questions|length }} correct</strong>
+                <p>Finish every comparison and submit once to move into the planning step.</p>
+            </aside>
+        </div>
+    </section>
 
-    <div id="rows" class="v2-rows"></div>
+    <section class="binary-panel">
+        <div class="binary-panel-header">
+            <div>
+                <h2>Choose one option in every row</h2>
+                <p class="muted">
+                    Each pair compares two everyday choices. Select the one with lower emissions.
+                </p>
+            </div>
 
-    <div class="v2-controls">
-        <button id="submit-btn" class="btn-primary" disabled>Submit</button>
-        <p id="submit-hint" class="muted">Make a choice in every row to activate submit.</p>
-    </div>
+            <div class="binary-progress" aria-live="polite">
+                <span id="progress-count" class="binary-progress-count">0 / {{ questions|length }} answered</span>
+                <div class="binary-progress-bar" aria-hidden="true">
+                    <span id="progress-fill" class="binary-progress-fill"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="rows" class="v2-rows"></div>
+
+        <div class="v2-controls">
+            <div class="v2-actions">
+                <button id="submit-btn" class="btn-primary" disabled>Submit Answers</button>
+                <a id="to-planner-link" class="btn-primary binary-complete-link nav-hidden" href="{{ url_for('quiz_planner') }}">
+                    Go to Planner &rarr;
+                </a>
+            </div>
+            <p id="submit-hint" class="muted">Make a choice in every row to activate submit.</p>
+        </div>
+    </section>
 </main>
 {% endblock %}
 

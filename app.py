@@ -29,6 +29,7 @@ from flask import (
 )
 import json
 import os
+import random
 from datetime import datetime
 
 app = Flask(__name__)
@@ -73,10 +74,14 @@ def items_by_id():
 
 # ADDED FOR BINARY QUIZ — strips correct answers before sending to client
 def binary_questions_for_client():
-    return [
-        {k: v for k, v in q.items() if k != "correct"}
-        for q in load_json("binary_questions.json")
-    ]
+    client_questions = []
+    for q in load_json("binary_questions.json"):
+        client_question = {k: v for k, v in q.items() if k != "correct"}
+        options = list(q.get("options") or [])
+        random.shuffle(options)
+        client_question["options"] = options
+        client_questions.append(client_question)
+    return client_questions
 
 
 def build_plan_summary(user_data):

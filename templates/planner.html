@@ -7,121 +7,145 @@
 {% endblock %}
 
 {% block content %}
-<!-- SETUP OVERLAY -->
 <div id="setup-overlay" class="overlay">
-    <h1 style="margin-bottom:8px">Sustainable Home Planner</h1>
-    <p style="color:#636E72; font-size:0.95rem; margin-bottom:14px">
-        Define your personalized budget for home changes this year:
-    </p>
+    <section class="planner-setup-card">
+        <div class="planner-stage-banner">
+            <span class="planner-stage-label"></span>
+            <strong>Stage 2</strong>
+        </div>
 
-    <div class="why-matters">
-        <div class="why-label">🌍 Why this matters</div>
-        Residential energy use drives roughly <strong>20% of US greenhouse gas emissions</strong>.
-        These gases trap heat in the atmosphere, accelerating climate change.
-        Heating and cooling alone account for nearly <strong>half of a typical home's footprint</strong>.
-        Small changes, consistently applied, make a real and measurable difference.
-    </div>
+        <div class="planner-setup-grid">
+            <div class="planner-setup-copy">
+                <h1>Sustainable Home Planner</h1>
+                <p class="planner-setup-lead">
+                    Set your budget, get a reachable CO<sub>2</sub> goal, and create a plan
+                    from room-by-room improvements that moves your household forward.
+                </p>
 
-    <input type="number" id="budget-input" placeholder="e.g. 3000" min="0">
-    <p style="font-size:0.75rem; color:#999; margin-top:0; margin-bottom:16px">
-        Your CO<sub>2</sub> reduction goal will be calculated based on what this budget
-        can realistically achieve.
-    </p>
-    <button id="start-planner-btn" class="nav-btn active" style="padding: 14px 40px; font-size: 1rem;">
-        Start Planner
-    </button>
+                <div class="why-matters">
+                    <div class="why-label">Why this matters</div>
+                    Residential energy use drives roughly <strong>20% of US greenhouse gas emissions</strong>.
+                    These gases trap heat in the atmosphere, accelerating climate change.
+                    Heating and cooling alone account for nearly <strong>half of a typical home's footprint</strong>.
+                    Small changes, consistently applied, make a real and measurable difference.
+                </div>
+            </div>
+
+            <div class="planner-setup-actions">
+                <div class="planner-setup-summary">
+                    <span class="planner-setup-summary-label">Next step</span>
+                    <strong>Enter your budget for this year</strong>
+                    <p>We will calculate a CO<sub>2</sub> reduction goal based on what that budget can realistically achieve.</p>
+                </div>
+
+                <label for="budget-input" class="planner-budget-label">Budget for home changes</label>
+                <input type="number" id="budget-input" placeholder="e.g. 3000" min="0">
+                <p class="planner-budget-note">
+                    Your CO<sub>2</sub> reduction goal updates automatically from this number.
+                </p>
+                <button id="start-planner-btn" class="nav-btn active planner-start-btn">Start Planner</button>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!-- GOAL UNLOCKED / RESULT OVERLAY -->
 <div id="congrats-overlay" class="overlay congrats-overlay">
-    <h1 style="font-size: 3rem; margin-bottom: 6px;">🎉 GOAL UNLOCKED!</h1>
-    <p style="font-size: 1.4rem; margin: 0 0 24px;" id="congrats-text">
-        You met your goal within budget.
-    </p>
+    <section class="planner-congrats-card">
+        <div class="planner-stage-banner planner-stage-banner-compact">
+            <span class="planner-stage-label">Stage 2 Complete</span>
+            <strong>Goal Unlocked</strong>
+        </div>
+        <p class="planner-congrats-title">You met your goal within budget.</p>
+        <p class="planner-congrats-copy" id="congrats-text">
+            You met your goal within budget.
+        </p>
 
-    <div class="congrats-actions">
-        <button id="email-cert-btn" class="nav-btn active congrats-btn">
-            📧 Email me my certificate
-        </button>
-        <button id="restart-budget-btn" class="nav-btn congrats-btn">
-            ⟳ Start over with different budget
-        </button>
-        <button id="close-congrats-btn" class="nav-btn congrats-btn subtle">
-            ↶ Keep editing this plan
-        </button>
-    </div>
+        <div class="congrats-actions">
+            <button id="email-cert-btn" class="nav-btn active congrats-btn">Email me my certificate</button>
+            <button id="restart-budget-btn" class="nav-btn congrats-btn">Start over with different budget</button>
+            <button id="close-congrats-btn" class="nav-btn congrats-btn subtle">Keep editing this plan</button>
+        </div>
+    </section>
 </div>
 
-<!-- HEADER -->
-<header class="planner-header">
-    <div class="header-brand">🌿 Home Carbon Planner</div>
-
-    <div class="stat-group">
-        <div class="stat-item">
-            <span class="stat-label">Total Budget</span>
-            <div class="budget-adjuster">
-                <button class="adj-btn" id="budget-minus" title="Decrease budget by $500">−</button>
-                <span id="total-budget-val" class="value budget">$0</span>
-                <button class="adj-btn" id="budget-plus" title="Increase budget by $500">+</button>
-            </div>
-            <span class="adj-hint">± $500 · auto-updates CO<sub>2</sub> goal</span>
-        </div>
-
-        <div class="stat-item">
-            <span class="stat-label">Remaining</span>
-            <span id="budget-val" class="value budget">$0</span>
-        </div>
-
-        <div class="stat-item">
-            <span class="stat-label">CO<sub>2</sub> Reduced / Goal</span>
-            <span id="co2-val" class="value impact">0.0 / 0.0T</span>
-        </div>
-    </div>
-
-    <div class="header-actions">
-        <button id="reset-items-btn" class="nav-btn" title="Clear all items and start fresh with same budget">
-            ↺ Reset Items
-        </button>
-        <button id="restart-btn" class="nav-btn danger" title="Go back to the budget setup screen">
-            ⟳ Restart
-        </button>
-    </div>
-</header>
-
-<!-- MAIN -->
-<div id="main-container">
-    <div id="sidebar">
-        <h3 id="sidebar-title" style="margin-bottom:12px">Kitchen Changes</h3>
-        <div id="card-container"></div>
-    </div>
-
-    <div id="room-area">
-        <div id="room-nav">
-            {% for room in rooms %}
-                <button class="nav-btn room-nav-btn {% if loop.first %}active{% endif %}"
-                        data-room="{{ room.key }}" data-color="{{ room.color }}">
-                    {{ room.icon }} {{ room.name }}
-                </button>
-            {% endfor %}
-        </div>
-
-        <h2 id="room-display-title" style="margin-bottom:10px; font-size:1.1rem; align-self:flex-start">
-            Map: Kitchen
-        </h2>
-
-        <div id="budget-empty-hint">
-            💡 <strong>Budget used up!</strong> Your CO<sub>2</sub> goal was set to what your budget can
-            actually achieve — so you can still hit it. Look for <strong>✓ Free</strong> items in each
-            room, and remove anything that isn't pulling its weight.
-        </div>
-
-        <div id="drop-zone" style="background-color: #FFD6A5;">
-            <div id="drag-hint">
-                <div class="drag-arrow">👈</div>
-                <div class="drag-text">Drag items here to add them to your plan</div>
-                <div class="drag-sub">Pick from the left panel and drop them into this room</div>
+<div class="planner-shell">
+    <header class="planner-header">
+        <div class="planner-header-intro">
+            <div class="planner-stage-chip">Stage 2</div>
+            <div>
+                <div class="header-brand">Home Carbon Planner</div>
+                <p class="planner-header-subtitle">Choose the changes that best fit your budget and emissions goal.</p>
             </div>
         </div>
+
+        <div class="stat-group">
+            <div class="stat-item">
+                <span class="stat-label">Total Budget</span>
+                <div class="budget-adjuster">
+                    <button class="adj-btn" id="budget-minus" title="Decrease budget by $500">-</button>
+                    <span id="total-budget-val" class="value budget">$0</span>
+                    <button class="adj-btn" id="budget-plus" title="Increase budget by $500">+</button>
+                </div>
+                <span class="adj-hint">+/- $500 and the CO<sub>2</sub> goal updates automatically</span>
+            </div>
+
+            <div class="stat-item">
+                <span class="stat-label">Remaining</span>
+                <span id="budget-val" class="value budget">$0</span>
+            </div>
+
+            <div class="stat-item">
+                <span class="stat-label">CO<sub>2</sub> Reduced / Goal</span>
+                <span id="co2-val" class="value impact">0.0 / 0.0T</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button id="reset-items-btn" class="nav-btn" title="Clear all items and start fresh with the same budget">Reset Items</button>
+            <button id="restart-btn" class="nav-btn danger" title="Go back to the budget setup screen">Restart</button>
+        </div>
+    </header>
+
+    <div id="main-container">
+        <aside id="sidebar">
+            <div class="planner-panel-head">
+                <span class="planner-panel-kicker">Available changes</span>
+                <h3 id="sidebar-title">Kitchen Changes</h3>
+            </div>
+            <div id="card-container"></div>
+        </aside>
+
+        <section id="room-area">
+            <div class="planner-room-header">
+                <div>
+                    <span class="planner-panel-kicker">Room map</span>
+                    <h2 id="room-display-title">Map: Kitchen</h2>
+                </div>
+
+                <div id="room-nav">
+                    {% for room in rooms %}
+                        <button class="nav-btn room-nav-btn {% if loop.first %}active{% endif %}"
+                                data-room="{{ room.key }}" data-color="{{ room.color }}">
+                            {{ room.name }}
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="budget-empty-hint">
+                <strong>Budget used up.</strong> Your CO<sub>2</sub> goal was set to what your budget can
+                realistically achieve, so you can still hit it. Look for <strong>Free</strong> items in each
+                room, and remove anything that is not pulling its weight.
+            </div>
+
+            <div id="drop-zone" style="background-color: #FFD6A5;">
+                <div id="drag-hint">
+                    <div class="drag-arrow">Add</div>
+                    <div class="drag-text">Drag items here to add them to your plan</div>
+                    <div class="drag-sub">Pick from the left panel and drop them into this room</div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 {% endblock %}

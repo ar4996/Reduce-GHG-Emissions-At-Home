@@ -1,6 +1,6 @@
 # Reducing Greenhouse Gas Emissions at Home
 
-This project is focused on helping people who care about sustainability learn practical ways to reduce greenhouse gas emissions at home.
+An interactive Flask app for a UI Design final project that teaches users how to reduce household emissions, checks understanding with a short quiz, and then lets them build a budget-aware emissions reduction plan.
 
 ## Team Members
 - Victor Edward Bula
@@ -8,86 +8,37 @@ This project is focused on helping people who care about sustainability learn pr
 - Dabeet Sharma
 - Ankit Mohapatra
 
-## Project Overview
-Our team’s project explores the question:
+## Current App Flow
+The current prototype is a two-stage experience:
 
-**How can we help people reduce greenhouse gas emissions at home in ways that are practical, understandable, and motivating?**
+1. Learning section
+Users move through short lesson content about sustainable changes in the home.
 
-To address this, we built an interactive app prototype that combines:
+2. Stage 1 quiz
+Users complete a binary comparison quiz by choosing the lower-emission option in each row.
 
-- a learning section that introduces users to sustainability concepts and actionable ways to lower emissions at home,
-- a quiz section that reinforces what users learned,
-- and a budget / emissions reduction exercise that helps users think through tradeoffs, costs, and impact.
+3. Stage 2 planner
+After unlocking the planner, users to enter a budget, receive a reachable CO2 reduction goal, and build a plan by selecting room-based improvements.
 
-Our final direction combines elements from two earlier prototypes:
+## Main Features
+- Shared navigation across the main pages
+- Lesson flow for sustainable living content
+- Stage 1 emissions quiz with shuffled answer order
+- Stage 2 planner with budget setup and goal calculation
+- Room-by-room planning interface
+- Cost tracking and CO2 reduction tracking
+- Drag-and-drop item planning
+- Reset and restart flows
 
-- the lesson plan + short quiz from Avi’s prototype
-- the budget / emissions reduction exercise from Victor’s prototype
+## Tech Stack
+- Python
+- Flask
+- HTML / Jinja templates
+- CSS
+- JavaScript
 
-## Goal
-The goal of this project is to create an experience that is:
-
-- educational,
-- interactive,
-- easy to navigate,
-- and useful for people who want to make more sustainable choices in their daily lives.
-
-## Core Features
-
-### 1. Learning Portion
-The learning section introduces users to:
-
-- what greenhouse gas emissions are,
-- how household behaviors contribute to emissions,
-- and what changes at home can reduce environmental impact.
-
-This section serves as the entry point into the app and helps build the knowledge users need before interacting with the planner.
-
-### 2. Quiz / Planner Portion
-The interactive planner section helps users apply what they learned by exploring sustainability choices across different parts of the home.
-
-Users can:
-
-- review different sustainability actions,
-- consider costs and emissions reductions,
-- and build a plan based on a budget and emissions-reduction goal.
-
-This makes the experience more practical by connecting environmental impact with real-life decision-making.
-
-### 3. Basic Interactive Functionality
-The implemented prototype now includes basic functionality beyond static design screens.
-
-Current functionality includes:
-
-- navigation between learning pages,
-- progression through the learning flow,
-- a working planner interface,
-- budget and emissions goal tracking,
-- item selection and removal,
-- and backend data persistence for user progress and planning choices.
-
-## Repository Purpose
-This repository contains:
-
-- project planning materials,
-- prototype assets,
-- implementation files,
-- and supporting documentation for our UI Design semester project.
-
-## Development Progress
-Our project has moved beyond the initial planning stage.
-
-Completed progress includes:
-
-- topic selected,
-- prototype direction finalized,
-- GitHub repository created,
-- team roles assigned,
-- interface designs implemented,
-- and basic functionality added to support the interactive experience.
-
-## Current Status
-The designs have been implemented, and the application now includes core interactive behavior. At this stage, the project functions as a basic working prototype that demonstrates the main user flow and overall concept.
-
-## Project Vision
-We want this project to help users feel that reducing emissions at home is not overwhelming. By combining learning, interaction, and practical decision-making, we aim to create a simple but meaningful sustainability tool.
+## Project Goal
+The goal of the project is to make emissions reduction at home feel understandable, practical, and actionable by combining:
+- learning,
+- short knowledge checks,
+- and a planning exercise tied to real costs and tradeoffs.
