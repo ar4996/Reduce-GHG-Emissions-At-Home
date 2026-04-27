@@ -75,6 +75,14 @@ body {
     min-height: 100vh;
 }
 
+/* Reuse the quiz/planner background on learning pages. */
+.learn-page {
+    background:
+        radial-gradient(circle at top left, rgba(182, 215, 168, 0.82), transparent 28%),
+        radial-gradient(circle at top right, rgba(147, 196, 125, 0.22), transparent 24%),
+        linear-gradient(180deg, #d9ead3 0%, #ecf5e9 50%, #f7fbf6 100%);
+}
+
 .simple-container, .hero {
     max-width: 760px;
     margin: 0 auto;
