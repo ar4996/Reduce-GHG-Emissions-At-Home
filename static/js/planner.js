@@ -128,6 +128,7 @@ function setRoom(name, color) {
     document.querySelectorAll('.room-nav-btn').forEach((button) => button.classList.remove('active'));
     const button = document.querySelector(`.room-nav-btn[data-room="${name}"]`);
     if (button) button.classList.add('active');
+    button.style.background = color;
     render();
 }
 
