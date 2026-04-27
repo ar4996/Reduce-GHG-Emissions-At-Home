@@ -8,45 +8,23 @@
 
 {% block content %}
 <div id="setup-overlay" class="overlay">
-    <section class="planner-setup-card">
-        <div class="planner-stage-banner">
-            <span class="planner-stage-label"></span>
-            <strong>Stage 2</strong>
-        </div>
+<section class="planner-setup-card text-center">
+    <div class="planner-setup-copy">
+        <h2 class="planner-stage-label" style="font-size: 1.5rem; color: #4d6d42;">Stage 2:</h2>
+        <h1 style="color: #2d5a27; font-weight: 800; margin-bottom: 30px;">Sustainable Home Planner</h1>
+        <p class="planner-setup-lead" style="font-size: 1.2rem; color: #50645c; margin-bottom: 40px;">
+            Define your personalized budget for home changes this year:
+        </p>
+    </div>
 
-        <div class="planner-setup-grid">
-            <div class="planner-setup-copy">
-                <h1>Sustainable Home Planner</h1>
-                <p class="planner-setup-lead">
-                    Set your budget, get a reachable CO<sub>2</sub> goal, and create a plan
-                    from room-by-room improvements that moves your household forward.
-                </p>
-
-                <div class="why-matters">
-                    <div class="why-label">Why this matters</div>
-                    Residential energy use drives roughly <strong>20% of US greenhouse gas emissions</strong>.
-                    These gases trap heat in the atmosphere, accelerating climate change.
-                    Heating and cooling alone account for nearly <strong>half of a typical home's footprint</strong>.
-                    Small changes, consistently applied, make a real and measurable difference.
-                </div>
-            </div>
-
-            <div class="planner-setup-actions">
-                <div class="planner-setup-summary">
-                    <span class="planner-setup-summary-label">Next step</span>
-                    <strong>Enter your budget for this year</strong>
-                    <p>We will calculate a CO<sub>2</sub> reduction goal based on what that budget can realistically achieve.</p>
-                </div>
-
-                <label for="budget-input" class="planner-budget-label">Budget for home changes</label>
-                <input type="number" id="budget-input" placeholder="e.g. 3000" min="0">
-                <p class="planner-budget-note">
-                    Your CO<sub>2</sub> reduction goal updates automatically from this number.
-                </p>
-                <button id="start-planner-btn" class="nav-btn active planner-start-btn">Start Planner</button>
-            </div>
-        </div>
-    </section>
+    <div class="planner-setup-actions mx-auto" style="max-width: 400px; background: transparent; border: none; box-shadow: none;">
+        <input type="number" id="budget-input" placeholder="e.g. 3000" min="0" class="form-control-lg">
+        <p class="planner-budget-note" style="margin-top: 15px; margin-bottom: 30px;">
+            Your CO<sub>2</sub> goal is calculated based on what this budget can realistically achieve.
+        </p>
+        <button id="start-planner-btn" class="nav-btn active planner-start-btn">Start Planner</button>
+    </div>
+</section>
 </div>
 
 <div id="congrats-overlay" class="overlay congrats-overlay">
