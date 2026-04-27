@@ -161,15 +161,6 @@ body.page-planner {
     line-height: 1.5;
 }
 
-.planner-start-btn.nav-btn.active {
-    width: 100%;
-    justify-content: center;
-    padding: 14px 18px;
-    font-size: 0.95rem;
-    border-color: var(--planner-magenta-2-dark);
-    background: linear-gradient(135deg, var(--planner-magenta-2) 0%, #8b3b65 100%);
-    box-shadow: 0 12px 22px rgba(116, 27, 71, 0.18);
-}
 
 .planner-start-btn.nav-btn.active:hover {
     border-color: var(--planner-magenta-2-dark);
