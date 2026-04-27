@@ -53,10 +53,10 @@ body.page-planner {
 .planner-congrats-card {
     width: min(1080px, 100%);
     padding: 32px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: none;
     border-radius: 30px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(247, 251, 246, 0.98) 58%, rgba(236, 245, 233, 0.99) 100%);
-    box-shadow: 0 24px 48px rgba(57, 72, 88, 0.12);
+    background: transparent;
+    box-shadow: none;
 }
 
 .planner-stage-banner {
