@@ -16,7 +16,7 @@ body.page-planner {
 .planner-shell {
     width: 100%;
     max-width: 100%;
-    margin: 0 auto;
+    margin: 0;
     padding: 24px;
     display: flex;
     flex: 1;
