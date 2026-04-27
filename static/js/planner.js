@@ -1,7 +1,7 @@
 /* Planner SPA behavior. */
 
 let config = { budget: 0, goal: 0 };
-let state = { budget: 0, co2: 0, currentRoom: 'Kitchen', applied: [] };
+let state = { budget: 0, co2: 0, currentRoom: 'Kitchen', applied: [], goalEverMet: false };
 
 const itemsById = {};
 const db = {};
@@ -75,10 +75,11 @@ function initPlanner() {
     state.budget = value;
     state.co2 = 0;
     state.applied = [];
+    state.goalEverMet = false;
     document.getElementById('setup-overlay').style.display = 'none';
     apiSaveBudget(config.budget, config.goal);
     updateStats();
-    render();
+    setRoom(roomList[0], roomColors[roomList[0]]);
 }
 
 function restoreFromBackend(savedPlan) {
@@ -92,6 +93,7 @@ function restoreFromBackend(savedPlan) {
     state.budget = config.budget - applied.reduce((sum, item) => sum + item.cost, 0);
     state.co2 = Math.round(applied.reduce((sum, item) => sum + item.impact, 0) * 100) / 100;
     state.applied = applied;
+    state.goalEverMet = false;
 
     document.getElementById('setup-overlay').style.display = 'none';
 
@@ -102,7 +104,7 @@ function restoreFromBackend(savedPlan) {
     }
 
     updateStats();
-    render();
+    setRoom(roomList[0], roomColors[roomList[0]]);
 }
 
 function adjustBudget(delta) {
@@ -125,10 +127,19 @@ function setRoom(name, color) {
     document.getElementById('room-display-title').innerText = `Map: ${name}`;
     document.getElementById('sidebar-title').innerText = `${name} Changes`;
     document.getElementById('drop-zone').style.backgroundColor = color;
-    document.querySelectorAll('.room-nav-btn').forEach((button) => button.classList.remove('active'));
+    document.querySelectorAll('.room-nav-btn').forEach((button) => {
+        button.classList.remove('active');
+        button.style.background = '';
+        button.style.color = '';
+        button.style.borderColor = '';
+    });
     const button = document.querySelector(`.room-nav-btn[data-room="${name}"]`);
-    if (button) button.classList.add('active');
-    button.style.background = color;
+    if (button) {
+        button.classList.add('active');
+        button.style.background = color;
+        button.style.borderColor = color;
+        button.style.color = '#2d5a27';
+    }
     render();
 }
 
@@ -232,10 +243,6 @@ function removeItem(id) {
         if (hint) hint.style.display = 'flex';
     }
 
-    if (parseFloat(state.co2) < parseFloat(config.goal)) {
-        document.getElementById('congrats-overlay').style.display = 'none';
-    }
-
     updateStats();
     render();
 }
@@ -247,6 +254,7 @@ function resetItems() {
     state.applied = [];
     state.budget = config.budget;
     state.co2 = 0;
+    state.goalEverMet = false;
 
     dz.innerHTML = '';
     const hint = document.createElement('div');
@@ -259,6 +267,10 @@ function resetItems() {
 
     document.getElementById('budget-empty-hint').style.display = 'none';
     document.getElementById('congrats-overlay').style.display = 'none';
+
+    const goalBtn = document.getElementById('goal-btn');
+    goalBtn.classList.remove('goal-met', 'goal-unmet');
+    goalBtn.classList.add('goal-btn-hidden');
 
     updateStats();
     render();
@@ -277,10 +289,22 @@ function updateStats() {
         document.getElementById('budget-empty-hint').style.display = 'block';
     }
 
-    if (parseFloat(state.co2) >= parseFloat(config.goal) && config.goal > 0) {
-        document.getElementById('congrats-text').innerText =
-            `You reduced ${state.co2.toFixed(1)} tons of CO2 within your $${config.budget.toLocaleString()} budget!`;
+    document.getElementById('congrats-text').innerHTML =
+        `You reduced ${state.co2.toFixed(1)} tons of CO<sub>2</sub> within budget!`;
+
+    const goalMet = parseFloat(state.co2) >= parseFloat(config.goal) && config.goal > 0;
+    const goalBtn = document.getElementById('goal-btn');
+
+    if (goalMet && !state.goalEverMet) {
+        // First time hitting goal: auto-show overlay, button stays hidden for now
+        state.goalEverMet = true;
         document.getElementById('congrats-overlay').style.display = 'flex';
+    } else if (state.goalEverMet) {
+        // Button has been revealed — update its state
+        goalBtn.classList.remove('goal-btn-hidden');
+        goalBtn.classList.toggle('goal-met', goalMet);
+        goalBtn.classList.toggle('goal-unmet', !goalMet);
+        goalBtn.disabled = !goalMet;
     }
 }
 
@@ -350,10 +374,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('reset-items-btn').addEventListener('click', resetItems);
     document.getElementById('restart-btn').addEventListener('click', restartPlanner);
 
+    document.getElementById('goal-btn').addEventListener('click', () => {
+        document.getElementById('congrats-overlay').style.display = 'flex';
+    });
     document.getElementById('email-cert-btn').addEventListener('click', emailCertificate);
     document.getElementById('restart-budget-btn').addEventListener('click', restartPlanner);
     document.getElementById('close-congrats-btn').addEventListener('click', () => {
         document.getElementById('congrats-overlay').style.display = 'none';
+        // Reveal the button after first dismissal
+        const goalBtn = document.getElementById('goal-btn');
+        const goalMet = parseFloat(state.co2) >= parseFloat(config.goal) && config.goal > 0;
+        goalBtn.classList.remove('goal-btn-hidden');
+        goalBtn.classList.toggle('goal-met', goalMet);
+        goalBtn.classList.toggle('goal-unmet', !goalMet);
+        goalBtn.disabled = !goalMet;
     });
 
     document.querySelectorAll('.room-nav-btn').forEach((button) => {
