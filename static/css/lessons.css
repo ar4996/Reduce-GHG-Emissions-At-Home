@@ -42,11 +42,6 @@
     width: 150px;
 }
 
-.navbar .nav-link {
-  color: black;
-  text-decoration: none;
-}
-
 .lesson-buttons{
     display: flex;
     justify-content: center;
