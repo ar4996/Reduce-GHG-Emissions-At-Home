@@ -346,5 +346,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: stretch;
+        size: 24px;
+        font-weight: bold;
     }
 }

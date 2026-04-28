@@ -14,8 +14,8 @@
 }
 
 .title{
-    color: var(--accent-green);
-    font-size: 40px;
+    color: #1d8449;
+    font-size: 32px;
     font-weight: bold;
 }
 
@@ -64,6 +64,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-weight: bold;
 }
 
 #welcome-page .welcome-buttons .btn.btn-primary {
@@ -98,6 +99,8 @@
 
 .welcome-button-width{
     width: 150px;
+    font-size: 18.7px;
+    line-height: 1.2;
 }
 
 .lesson-buttons{
@@ -105,10 +108,32 @@
     justify-content: center;
 }
 
+/* Lesson welcome CTA button color */
+.lesson-buttons .btn {
+    background-color: #1d8449;
+    border-color: #1d8449;
+    color: #ffffff;
+}
+
+.lesson-buttons .btn:hover {
+    filter: brightness(0.92);
+    color: #ffffff;
+}
+
 .lesson-opportunity{
     color: darkblue;
     font-size: 30px;
     font-weight: bold;
+}
+
+/* Lesson page primary button color (e.g., "Show Impact") */
+.impact-opportunity .btn.btn-primary {
+    background-color: #1d8449;
+    border-color: #1d8449;
+}
+
+.impact-opportunity .btn.btn-primary:hover {
+    filter: brightness(0.92);
 }
 
 .lesson-progress {
