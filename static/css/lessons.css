@@ -14,7 +14,7 @@
 }
 
 .title{
-    color: darkblue;
+    color: var(--accent-green);
     font-size: 40px;
     font-weight: bold;
 }
@@ -30,12 +30,70 @@
 .houseimg {
     display: block;
     margin: 0 auto;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    max-height: 320px;
 }
 
 .welcome-buttons{
     display: flex;
     justify-content: center;
     gap: 8px;
+}
+
+/* Welcome page only overrides (scoped to the #welcome-page wrapper). */
+#welcome-page .title {
+    color: #1d8449;
+}
+
+#welcome-page .houseimg {
+    max-width: 520px;
+    max-height: 420px;
+}
+
+#welcome-page .welcome-buttons {
+    margin-top: 18px;
+    gap: 22px;
+}
+
+#welcome-page .welcome-button-width {
+    width: 240px;
+    min-height: 92px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#welcome-page .welcome-buttons .btn.btn-primary {
+    background-color: #1d8449;
+    border-color: #1d8449;
+}
+
+#welcome-page .welcome-buttons .btn.btn-primary:hover {
+    filter: brightness(0.92);
+}
+
+/* Welcome page CTA buttons: green + maroon (scoped to this button row). */
+.welcome-buttons .btn.btn-primary {
+    background-color: var(--accent-green);
+    border-color: var(--accent-dark);
+}
+
+.welcome-buttons .btn.btn-primary:hover {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+.welcome-buttons .btn.btn-secondary {
+    background-color: #691F3D;
+    border-color: #691F3D;
+    color: #ffffff;
+}
+
+.welcome-buttons .btn.btn-secondary:hover {
+    filter: brightness(0.92);
 }
 
 .welcome-button-width{

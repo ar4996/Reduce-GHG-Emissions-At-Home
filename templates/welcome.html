@@ -1,14 +1,37 @@
 {% extends "layout.html" %}
 
+{% block body_class %}learn-page{% endblock %}
+
 {% block content %}
-  <div class="container mt-4">
-    <p class="centertext title">Sustainable Living</p>
-    <p class="centertext dark-grey">Every tonne of CO₂ emissions adds to global warming, while every tonne avoided reduces future warming.</p>
-    <p class="centertext dark-grey">Learn how to make decisions at home that will reduce your greenhouse gas emissions!</p>
-    <img class="houseimg" src="https://static.vecteezy.com/system/resources/thumbnails/005/991/386/small/house-model-from-inside-detailed-interiors-with-furniture-and-decor-in-flat-style-big-house-in-cut-cottage-cutaway-with-interiors-of-bedroom-living-room-kitchen-dining-bathroom-nursery-vector.jpg" alt="House Image">
-    <div class="welcome-buttons">
-      <a href="{{ url_for('lesson_welcome') }}" class="btn btn-primary welcome-button-width">Learn About Sustainable Living</a>
-      <a href="{{ url_for('quiz_binary') }}" class="btn btn-secondary welcome-button-width">Test Your Knowledge</a>
+  <div id="welcome-page" class="container py-4">
+    <div class="row align-items-center g-4">
+      <div class="col-12 col-lg-6">
+        <img
+          class="houseimg img-fluid"
+          src="https://cdn.britannica.com/21/282821-184-3A531095/data/f65e6f91c268373850b99c719676f172.jpg"
+          alt="House Image"
+        >
+      </div>
+
+      <div class="col-12 col-lg-6 text-center">
+        <p class="title mb-3">Sustainable Living</p>
+        <p class="dark-grey mb-3">
+          Every tonne of CO₂ emissions adds to global warming,
+          while every tonne avoided reduces future warming.
+        </p>
+        <p class="dark-grey mb-4">
+          <strong>Learn how to make decisions at home that will reduce your greenhouse gas emissions!</strong>
+        </p>
+
+        <div class="welcome-buttons">
+          <a href="{{ url_for('lesson_welcome') }}" class="btn btn-primary btn-lg welcome-button-width">
+            Learn about<br> sustainable living
+          </a>
+          <a href="{{ url_for('quiz_binary') }}" class="btn btn-secondary btn-lg welcome-button-width">
+            Test<br> your knowledge
+          </a>
+        </div>
+      </div>
     </div>
   </div>
    

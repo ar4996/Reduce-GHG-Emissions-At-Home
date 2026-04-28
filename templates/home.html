@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Reducing Greenhouse Gas Emissions at Home{% endblock %}
-{% block body_class %}page-simple{% endblock %}
+{% block body_class %}page-simple learn-page{% endblock %}
 
 {% block content %}
 <main class="hero">
@@ -11,9 +11,13 @@
         your greenhouse gas emissions.
     </p>
 
-    <form action="{{ url_for('start') }}" method="POST" class="start-form">
-        <button type="submit" class="btn-primary-lg">Start</button>
-    </form>
+    <div class="hero-actions">
+        <form action="{{ url_for('start') }}" method="POST" class="start-form">
+            <button type="submit" class="btn-primary-lg">Start</button>
+        </form>
+
+        <a href="{{ url_for('quiz_binary') }}" class="btn-maroon-lg">Test yourself</a>
+    </div>
 
     <nav class="hero-jump">
         <a href="{{ url_for('learn_index') }}">Learn about sustainable living</a>

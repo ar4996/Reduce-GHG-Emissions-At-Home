@@ -10,6 +10,7 @@
     --text-dark: #2D3436;
     --accent-green: #2ECC71;
     --accent-dark: #27AE60;
+    --accent-maroon: #691F3D;
     --border-gray: #DFE6E9;
     --rita-red: #D63031;
 }
@@ -23,7 +24,7 @@ body {
     top: 0;
     z-index: 3000;
     border-bottom: 1px solid rgba(45, 52, 54, 0.08);
-    background: rgba(255, 255, 255, 0.88);
+    background: rgba(238, 241, 243, 0.96);
     backdrop-filter: blur(14px);
 }
 
@@ -51,8 +52,8 @@ body {
     border: 1px solid rgba(45, 52, 54, 0.08);
     border-radius: 999px;
     color: #536067;
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 800;
     text-decoration: none;
     transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
@@ -117,7 +118,15 @@ body {
 .hero { text-align: center; padding-top: 80px; }
 .hero h1 { font-size: 2.2rem; margin-bottom: 16px; }
 .hero .lead { font-size: 1.05rem; color: #555; line-height: 1.6; max-width: 560px; margin: 0 auto 32px; }
-.start-form { margin-bottom: 20px; }
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.start-form { margin: 0; }
 .hero-jump { font-size: 0.9rem; color: #888; }
 .hero-jump a { color: var(--accent-dark); text-decoration: none; font-weight: 600; }
 .hero-jump a:hover { text-decoration: underline; }
@@ -270,7 +279,7 @@ body {
 .room-laundry     { background: var(--room-laundry); }
 
 /* Buttons */
-.btn-primary, .btn-secondary, .btn-primary-lg {
+.btn-primary, .btn-secondary, .btn-primary-lg, .btn-maroon, .btn-maroon-lg {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 20px;
@@ -302,6 +311,24 @@ body {
     border-radius: 30px;
 }
 .btn-primary-lg:hover { background: var(--accent-dark); }
+
+.btn-maroon,
+.btn-maroon-lg {
+    background: var(--accent-maroon);
+    color: white;
+    border-color: var(--accent-maroon);
+}
+
+.btn-maroon:hover,
+.btn-maroon-lg:hover {
+    filter: brightness(0.92);
+}
+
+.btn-maroon-lg {
+    padding: 16px 48px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+}
 
 .page-nav {
     display: flex;
