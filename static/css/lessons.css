@@ -156,3 +156,71 @@
     border-color: #691F3D;
     color: #ffffff;
 }
+
+.room-image-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.room-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hotspot {
+    position: absolute;
+    background-color: rgba(255, 255, 0, 0);
+    border: 3px solid rgba(255, 215, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    border-radius: 8px;
+}
+
+.hotspot:hover {
+    background-color: rgba(255, 255, 0, 0.35);
+    border-color: rgba(255, 215, 0, 0.9);
+}
+
+.hotspot.selected {
+    background-color: rgba(255, 255, 0, 0.35);
+    border-color: rgba(255, 215, 0, 0.9);
+}
+
+/* Opportunity table */
+
+.opportunity-table {
+    font-size: 0.85rem;
+    background-color: #ffffff;
+}
+
+.opportunity-table th,
+.opportunity-table td {
+    vertical-align: middle;
+}
+
+.opportunity-table th {
+    background-color: #f8f9fa;
+}
+
+/* Next room / quiz button */
+
+#next-room-btn {
+    width: 100%;
+}
+
+.cost-high {
+    color: green;
+    font-weight: bold;
+}
+
+.cost-medium {
+    color: goldenrod;
+    font-weight: bold;
+}
+
+.cost-low {
+    color: red;
+    font-weight: bold;
+}

@@ -1,38 +1,186 @@
 [
   {
     "room": "Kitchen",
-    "room_image": "https://t4.ftcdn.net/jpg/01/97/62/75/360_F_197627587_9W7ar7XOEv2586rWWbkHL1GqeZmMlv6l.jpg",
-    "opportunity": "Cooktops",
-    "description": "Switching from a gas cooktop to an induction cooktop",
-    "impact": "This can cut stove-related carbon emissions by ~640 kg CO₂ every year.",
-    "impact_cost_effectiveness": "Low",
-    "next_room": "Living Room"
+    "room_image": "images/kitchen.png",
+    "next_room": "Living Room",
+    "opportunities": [
+      {
+        "item_key": "fridge",
+        "label": "Fridge",
+        "opportunity": "Optimize Fridge Temperature",
+        "description": "Slightly warmer fridge settings can reduce energy use while still keeping food safe.",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "77%",
+          "top": "13%",
+          "width": "20%",
+          "height": "75%"
+        }
+      },
+      {
+        "item_key": "microwave",
+        "label": "Microwave",
+        "opportunity": "Unplug Phantoms",
+        "description": "Devices draw power even when \"off\"",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "15%",
+          "top": "42%",
+          "width": "18%",
+          "height": "15%"
+        }
+      },
+      {
+        "item_key": "cooktop",
+        "label": "Gas cooktop",
+        "opportunity": "Induction Cooktop",
+        "description": "Switching from a gas cooktop to an induction cooktop eliminates gas combustion in the kitchen.",
+        "impact_cost_effectiveness": "Low",
+        "hotspot": {
+          "left": "30%",
+          "top": "50%",
+          "width": "24%",
+          "height": "13%"
+        }
+      }
+    ]
   },
   {
     "room": "Living Room",
-    "room_image": "https://www.shutterstock.com/image-vector/cartoon-room-interior-home-furniture-600nw-2423784435.jpg",
-    "opportunity": "Light Bulbs",
-    "description": "Replace 30 incandescent light bulbs with 30 LED lamps (in your living room or elsewhere at home)",
-    "impact": "You'll reduce emissions by ~1,800 kg CO₂ every year.",
-    "impact_cost_effectiveness": "High",
-    "next_room": "Bathroom"
+    "room_image": "images/livingroom.png",
+    "next_room": "Bathroom",
+    "opportunities": [
+      {
+        "item_key": "thermostat",
+        "label": "Smart thermostat",
+        "opportunity": "Smart Thermostat",
+        "description": "Adjusts automatically when you're away or asleep",
+        "impact_cost_effectiveness": "Medium",
+        "hotspot": {
+          "left": "2%",
+          "top": "34%",
+          "width": "7%",
+          "height": "9%"
+        }
+      },
+      {
+        "item_key": "curtains",
+        "label": "Curtains",
+        "opportunity": "Thermal Curtains",
+        "description": "Reduce heat transfer through glass",
+        "impact_cost_effectiveness": "Medium",
+        "hotspot": {
+          "left": "31%",
+          "top": "12%",
+          "width": "34%",
+          "height": "38%"
+        }
+      },
+      {
+        "item_key": "light_bulbs",
+        "label": "Light bulbs",
+        "opportunity": "LED Light Bulbs",
+        "description": "75% less energy than incandescent light bulbs",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "43%",
+          "top": "0%",
+          "width": "13%",
+          "height": "17%"
+        }
+      }
+    ]
   },
   {
     "room": "Bathroom",
-    "room_image": "https://previews.123rf.com/images/fivestarspro/fivestarspro2002/fivestarspro200200532/140313863-team-of-plumbers-install-water-heater-in-bathroom-housewife-watching-working-process-workers-set.jpg",
-    "opportunity": "Water Heater",
-    "description": "Switching from a gas water heater to a heat pump water heater",
-    "impact": "You'll reduce emissions by ~900 kg CO₂ every year.",
-    "impact_cost_effectiveness": "Low",
-    "next_room": "Laundry Room"
+    "room_image": "images/bathroom.png",
+    "next_room": "Laundry Room",
+    "opportunities": [
+      {
+        "item_key": "water_heater",
+        "label": "Water heater",
+        "opportunity": "Heat Pump Water Heater",
+        "description": "60% less electricity than a standard water heater",
+        "impact_cost_effectiveness": "Low",
+        "hotspot": {
+          "left": "51%",
+          "top": "6%",
+          "width": "16%",
+          "height": "34%"
+        }
+      },
+      {
+        "item_key": "showerhead",
+        "label": "Showerhead",
+        "opportunity": "Low Flow Showerheads",
+        "description": "less hot water used = less energy to heat it",
+        "impact_cost_effectiveness": "Medium",
+        "hotspot": {
+          "left": "73%",
+          "top": "15%",
+          "width": "14%",
+          "height": "13%"
+        }
+      },
+      {
+        "item_key": "shower_controls",
+        "label": "Shower controls",
+        "opportunity": "5-Minute Shower Goal",
+        "description": "Hot water is the real cost of long showers",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "80%",
+          "top": "45%",
+          "width": "10%",
+          "height": "20%"
+        }
+      }
+    ]
   },
   {
     "room": "Laundry Room",
-    "room_image": "https://t3.ftcdn.net/jpg/05/04/07/54/360_F_504075455_3kjvzfg4bia9TGxanaMiZl118REf6XyW.jpg",
-    "opportunity": "Drying",
-    "description": "Switching from using a dryer to air drying",
-    "impact": "You'll reduce emissions by ~1,000 kg CO₂ every year",
-    "impact_cost_effectiveness": "High",
-    "next_room": "Congrats on finishing!"
+    "room_image": "images/laundryroom.png",
+    "next_room": null,
+    "opportunities": [
+      {
+        "item_key": "washer",
+        "label": "Washer",
+        "opportunity": "Cold Water Wash",
+        "description": "90% of washing machine energy goes to heating water",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "25%",
+          "top": "48%",
+          "width": "22%",
+          "height": "38%"
+        }
+      },
+      {
+        "item_key": "lint_filter",
+        "label": "Lint filter",
+        "opportunity": "Clean Lint Filter",
+        "description": "A clogged filter makes the dryer run longer",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "64%",
+          "top": "42%",
+          "width": "7%",
+          "height": "11%"
+        }
+      },
+      {
+        "item_key": "dryer",
+        "label": "Dryer",
+        "opportunity": "Air Drying Rack",
+        "description": "Dryers are among the highest-energy appliances",
+        "impact_cost_effectiveness": "High",
+        "hotspot": {
+          "left": "49%",
+          "top": "54%",
+          "width": "21%",
+          "height": "34%"
+        }
+      }
+    ]
   }
 ]

@@ -138,7 +138,7 @@ def lesson_welcome():
 @app.route('/learn/<int:index>')
 def lesson_page(index):
     if index < 0 or index >= len(sustainable_living_opportunities):
-                return redirect(url_for('lesson_welcome'))
+        return redirect(url_for('lesson_welcome'))
 
     user_data = load_user_data()
     user_data["learning"].append({
@@ -147,15 +147,19 @@ def lesson_page(index):
     })
     save_user_data(user_data)
 
-    current_room = sustainable_living_opportunities[index]
+    room_data = sustainable_living_opportunities[index].copy()
+
+    room_data["room_image_url"] = url_for(
+        "static",
+        filename=room_data["room_image"]
+    )
     next_index = index + 1 if index + 1 < len(sustainable_living_opportunities) else None
 
     return render_template(
-            "lesson.html",
-            room_data=current_room,
-            current_index=index,
-            next_index=next_index,
-            # prev_index=prev_index
+        "lesson.html",
+        room_data=room_data,
+        current_index=index,
+        next_index=next_index,
     )
 
 
