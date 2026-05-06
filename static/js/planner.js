@@ -352,25 +352,24 @@ function showCertOverlay(tier) {
     updateBadgeWidgets(tier); updateCertPlanList();
     playCelebrationSound(tier); if (tier === 'gold') launchConfetti(tier);
 }
-function showRejectionOverlay(overBudget) {
+function showRejectionOverlay() {
     const ov = document.getElementById('congrats-overlay');
     ov.classList.add('rejected'); ov.style.display = 'flex';
     const cc = ov.querySelector('.cert-card'); if (cc) cc.scrollTop = 0;
     document.getElementById('email-cert-btn').style.display = 'none';
     document.getElementById('restart-budget-btn').style.display = 'none';
     document.getElementById('reject-try-again-btn').style.display = '';
-    const title = overBudget ? 'Over Budget' : 'Plan Rejected';
-    document.getElementById('cert-title').textContent = title;
+    document.getElementById('cert-title').textContent = 'Plan Rejected';
     document.getElementById('cert-title').style.color = '#cc1111';
     document.getElementById('congrats-text').style.color = '#cc1111';
     document.querySelector('.cert-globe').style.display = 'none';
     document.getElementById('cert-badges-row').style.display = 'none';
     document.getElementById('rejected-stamp-wrap').style.display = 'flex';
     const stamp = document.querySelector('.rejected-stamp');
-    if (stamp) stamp.textContent = overBudget ? 'OVER BUDGET' : 'REJECTED';
+    if (stamp) stamp.textContent = 'REJECTED';
     updateCertPlanList();
     const sub = document.getElementById('cert-budget-sub');
-    if (sub) sub.textContent = overBudget ? `Over budget by $${Math.abs(state.budget).toLocaleString()}` : `$${state.budget.toLocaleString()} remaining`;
+    if (sub) sub.textContent = `$${state.budget.toLocaleString()} remaining`;
 }
 
 // ── Reveal overlay ────────────────────────────────────────────
@@ -383,15 +382,14 @@ function fadeRevealOut(targetOpacity, duration) {
     requestAnimationFrame(() => { rv.style.transition = `opacity ${duration}ms ease`; rv.style.opacity = String(targetOpacity); setTimeout(() => { if (targetOpacity === 0) { rv.style.display = 'none'; rv.style.pointerEvents = 'none'; } }, duration); });
 }
 function submitPlan() {
-    if (!state.applied.length) return;
-    const overBudget = state.budget < 0;
-    const tier = overBudget ? null : getBadgeTier(state.co2);
+    if (!state.applied.length || state.budget < 0) return;
+    const tier = getBadgeTier(state.co2);
     showRevealOverlay();
     if (tier) {
         playDrumRoll();
         setTimeout(() => { showCertOverlay(tier); fadeRevealOut(0, 800); }, 1050);
     } else {
-        showRejectionOverlay(overBudget);
+        showRejectionOverlay();
         fadeRevealOut(0, 380);
     }
 }
@@ -405,7 +403,7 @@ function updateStats() {
     const overBudget = state.budget < 0;
     const hint = document.getElementById('budget-empty-hint');
     if (overBudget) {
-        hint.innerHTML = `<strong>⚠ Over budget by $${Math.abs(state.budget).toLocaleString()}.</strong> Remove items or raise your budget. Submit is still available but will be rejected.`;
+        hint.innerHTML = `<strong>⚠ Over budget by $${Math.abs(state.budget).toLocaleString()}.</strong> Remove items to get back in range — Submit is blocked while you're over.`;
         hint.style.display = 'block';
     } else { hint.style.display = 'none'; }
 
@@ -415,7 +413,7 @@ function updateStats() {
     if (cs) cs.textContent = `reduced per year · $${state.budget.toLocaleString()} remaining under budget`;
     document.getElementById('congrats-text').innerHTML = `You reduced <strong>${state.co2.toFixed(1)} tons of CO₂</strong> within your $${config.budget.toLocaleString()} budget!`;
 
-    const canSubmit = config.goal > 0 && state.applied.length > 0;
+    const canSubmit = config.goal > 0 && state.applied.length > 0 && state.budget >= 0;
     const sb = document.getElementById('goal-btn');
     if (sb) { sb.disabled = !canSubmit; sb.classList.toggle('topnav-btn-goal-unmet', !canSubmit); sb.classList.toggle('topnav-btn-submit-ready', canSubmit); }
 }
