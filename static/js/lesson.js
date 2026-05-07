@@ -55,7 +55,7 @@ $(document).ready(function () {
         const nextIndex = $(this).data("next-index");
 
         if (nextIndex === null || nextIndex === undefined || nextIndex === "None") {
-            window.location.href = "/quiz/binary";
+            window.location.href = "/quiz/1";
         } else {
             window.location.href = "/learn/" + nextIndex;
         }

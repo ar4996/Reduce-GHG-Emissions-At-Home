@@ -21,7 +21,7 @@
       <div class="site-nav-links">
         <a href="{{ url_for('home') }}" class="site-nav-link{% if request.endpoint == 'home' %} is-active{% endif %}">Home</a>
         <a href="{{ url_for('learn_index') }}" class="site-nav-link{% if request.endpoint in ['learn_index', 'lesson_page', 'lesson_welcome'] %} is-active{% endif %}">How to Reduce Emissions at Home</a>
-        <a href="{{ url_for('quiz_binary') }}" class="site-nav-link{% if request.endpoint in ['quiz_binary', 'quiz_planner'] %} is-active{% endif %}">Test Yourself</a>
+        <a href="{{ url_for('quiz_planner') }}" class="site-nav-link{% if request.endpoint in ['quiz_binary', 'quiz_planner'] %} is-active{% endif %}">Test Yourself</a>
       </div>
     </div>
   </nav>
