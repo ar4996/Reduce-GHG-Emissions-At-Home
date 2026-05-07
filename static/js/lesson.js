@@ -15,6 +15,12 @@ $(document).ready(function () {
     const clickedItems = new Set();
     const totalHotspots = $(".hotspot").length;
 
+    const nextIndex = $("#next-room-btn").data("next-index");
+
+    if (nextIndex === null || nextIndex === undefined || nextIndex === "None") {
+        $("#next-room-btn").text("Congrats on finishing! Test Yourself");
+    }
+
     $(".hotspot").on("click", function () {
         const itemKey = $(this).data("item");
 
@@ -44,21 +50,14 @@ $(document).ready(function () {
             $("#opportunity-table-body").append(newRow);
         }
 
-        // After all hotspots are clicked, show the CO₂ reveal button.
-        // The CO₂ data itself is still hidden at this point.
         if (clickedItems.size === totalHotspots) {
             $("#show-co2-container").removeClass("d-none");
         }
     });
 
     $("#show-co2-btn").on("click", function () {
-        // Reveal the CO₂ emissions reduction data in the table.
         $(".co2-data").removeClass("d-none");
-
-        // Hide this button after it is clicked.
         $("#show-co2-container").addClass("d-none");
-
-        // Now show the next room button.
         $("#next-room-container").removeClass("d-none");
     });
 
