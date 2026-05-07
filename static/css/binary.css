@@ -272,14 +272,22 @@
 }
 
 .v2-opt.is-chosen {
-    border-color: #27ae60;
-    background: linear-gradient(135deg, #2ecc71 0%, #6ad98e 100%);
+    border-color: var(--accent-dark);
+    background: linear-gradient(
+        135deg,
+        var(--accent-green) 0%,
+        color-mix(in srgb, var(--accent-green), white 28%) 100%
+    );
     color: white;
-    box-shadow: 0 12px 22px rgba(46, 204, 113, 0.24);
+    box-shadow: 0 12px 22px rgba(45, 90, 39, 0.22);
 }
 
 .v2-opt.is-chosen:hover:not(:disabled) {
-    background: linear-gradient(135deg, #2ecc71 0%, #6ad98e 100%);
+    background: linear-gradient(
+        135deg,
+        var(--accent-green) 0%,
+        color-mix(in srgb, var(--accent-green), white 28%) 100%
+    );
 }
 
 .v2-row.is-locked {
@@ -292,8 +300,12 @@
 }
 
 .v2-row.is-locked .v2-opt.is-chosen {
-    border-color: #219150;
-    background: linear-gradient(135deg, #27ae60 0%, #59c578 100%);
+    border-color: var(--accent-dark);
+    background: linear-gradient(
+        135deg,
+        var(--accent-dark) 0%,
+        color-mix(in srgb, var(--accent-dark), white 24%) 100%
+    );
     color: white;
 }
 
@@ -325,7 +337,7 @@
     padding: 14px 32px;
     border-radius: 999px;
     font-size: 0.95rem;
-    box-shadow: 0 12px 24px rgba(46, 204, 113, 0.24);
+    box-shadow: 0 12px 24px rgba(45, 90, 39, 0.22);
 }
 
 .binary-complete-link {

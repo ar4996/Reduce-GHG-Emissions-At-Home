@@ -32,6 +32,9 @@ $(document).ready(function () {
         const existingRow = $(`#opportunity-table-body tr[data-item="${itemKey}"]`);
 
         if (existingRow.length === 0) {
+            // Show the table the first time we add a row.
+            $("#opportunity-table").removeClass("d-none");
+
             const newRow = `
                 <tr data-item="${itemKey}">
                     <td>${itemData.opportunity}</td>

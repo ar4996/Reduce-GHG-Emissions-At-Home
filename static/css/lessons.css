@@ -1,26 +1,32 @@
+/* ============================================================
+   Lesson / welcome pages (Bootstrap layout)
+   Keep visuals consistent with shared tokens in styles.css.
+   ============================================================ */
+
 .house-img{
     max-width: 300px;
     margin-bottom: 16px;
     display: block;
 }
 
-/* Match the quiz/planner page background on the learning screens. */
+/* Ensure layout.html pages (which don't use .page-simple) still inherit
+   the same typography + base colors as the rest of the site.
+   Background is defined in styles.css (.learn-page). */
 .learn-page {
     min-height: 100vh;
-    background:
-        radial-gradient(circle at top left, rgba(182, 215, 168, 0.82), transparent 28%),
-        radial-gradient(circle at top right, rgba(147, 196, 125, 0.22), transparent 24%),
-        linear-gradient(180deg, #d9ead3 0%, #ecf5e9 50%, #f7fbf6 100%);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-dark);
 }
 
 .title{
-    color: #1d8449;
-    font-size: 32px;
-    font-weight: bold;
+    color: var(--accent-dark);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
 }
 
 .dark-grey {
-    color: #444444;
+    color: #536067;
 }
 
 .centertext {
@@ -44,7 +50,7 @@
 
 /* Welcome page only overrides (scoped to the #welcome-page wrapper). */
 #welcome-page .title {
-    color: #1d8449;
+    color: var(--accent-dark);
 }
 
 #welcome-page .houseimg {
@@ -67,15 +73,6 @@
     font-weight: bold;
 }
 
-#welcome-page .welcome-buttons .btn.btn-primary {
-    background-color: #1d8449;
-    border-color: #1d8449;
-}
-
-#welcome-page .welcome-buttons .btn.btn-primary:hover {
-    filter: brightness(0.92);
-}
-
 /* Welcome page CTA buttons: green + maroon (scoped to this button row). */
 .welcome-buttons .btn.btn-primary {
     background-color: var(--accent-green);
@@ -88,8 +85,8 @@
 }
 
 .welcome-buttons .btn.btn-secondary {
-    background-color: #691F3D;
-    border-color: #691F3D;
+    background-color: var(--accent-maroon);
+    border-color: var(--accent-maroon);
     color: #ffffff;
 }
 
@@ -99,7 +96,6 @@
 
 .welcome-button-width{
     width: 150px;
-    font-size: 18.7px;
     line-height: 1.2;
 }
 
@@ -110,30 +106,32 @@
 
 /* Lesson welcome CTA button color */
 .lesson-buttons .btn {
-    background-color: #1d8449;
-    border-color: #1d8449;
+    background-color: var(--accent-green);
+    border-color: var(--accent-dark);
     color: #ffffff;
 }
 
 .lesson-buttons .btn:hover {
-    filter: brightness(0.92);
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
     color: #ffffff;
 }
 
 .lesson-opportunity{
-    color: darkblue;
-    font-size: 30px;
-    font-weight: bold;
+    color: var(--accent-maroon);
+    font-size: 1.7rem;
+    font-weight: 800;
 }
 
 /* Lesson page primary button color (e.g., "Show Impact") */
 .impact-opportunity .btn.btn-primary {
-    background-color: #1d8449;
-    border-color: #1d8449;
+    background-color: var(--accent-green);
+    border-color: var(--accent-dark);
 }
 
 .impact-opportunity .btn.btn-primary:hover {
-    filter: brightness(0.92);
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
 }
 
 .lesson-progress {
@@ -144,17 +142,32 @@
 
 .lesson-step {
     flex: 1;
-    background-color: #e5e5e5;
-    border: 1px solid #cfcfcf;
+    background-color: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(45, 52, 54, 0.12);
+    border-radius: 12px;
     text-align: center;
     font-weight: 600;
     padding: 16px 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .lesson-step.active {
-    background-color: #691F3D;
-    border-color: #691F3D;
+    background-color: var(--accent-maroon);
+    border-color: var(--accent-maroon);
     color: #ffffff;
+}
+
+/* Normalize Bootstrap success buttons to match the shared green token. */
+.learn-page .btn.btn-success,
+.learn-page .btn.btn-primary {
+    background-color: var(--accent-green);
+    border-color: var(--accent-dark);
+}
+
+.learn-page .btn.btn-success:hover,
+.learn-page .btn.btn-primary:hover {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
 }
 
 .room-image-wrapper {
@@ -191,17 +204,86 @@
 /* Opportunity table */
 
 .opportunity-table {
-    font-size: 0.85rem;
+    width: 100%;
+    table-layout: fixed;
+    font-size: 0.95rem;
+    line-height: 1.35;
     background-color: #ffffff;
+    border: 1px solid var(--border-gray);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .opportunity-table th,
 .opportunity-table td {
     vertical-align: middle;
+    border-color: rgba(45, 52, 54, 0.12) !important;
 }
 
-.opportunity-table th {
-    background-color: #f8f9fa;
+.opportunity-table.table-sm > :not(caption) > * > * {
+    padding: 0.75rem 0.8rem;
+}
+
+.opportunity-table thead th {
+    background-color: rgba(189, 224, 254, 0.55);
+    color: #355029;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: normal;
+}
+
+.opportunity-table thead th:nth-child(1),
+.opportunity-table thead th:nth-child(2) {
+    white-space: nowrap;
+}
+
+.opportunity-table thead th:nth-child(3) {
+    text-align: right;
+}
+
+.opportunity-table th:nth-child(1),
+.opportunity-table td:nth-child(1) {
+    width: 32%;
+    min-width: 150px;
+}
+
+.opportunity-table th:nth-child(2),
+.opportunity-table td:nth-child(2) {
+    width: 44%;
+}
+
+.opportunity-table th:nth-child(3),
+.opportunity-table td:nth-child(3) {
+    width: 24%;
+    min-width: 160px;
+}
+
+.opportunity-table tbody td {
+    text-align: left;
+}
+
+.opportunity-table tbody td:nth-child(2) {
+    overflow-wrap: anywhere;
+}
+
+.opportunity-table tbody td:nth-child(3) {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.opportunity-table tbody td:first-child {
+    font-weight: 800;
+}
+
+.opportunity-table tbody tr:nth-child(even) {
+    background: rgba(238, 241, 243, 0.55);
+}
+
+.opportunity-table tbody tr:hover {
+    background: rgba(189, 224, 254, 0.28);
 }
 
 /* Next room / quiz button */

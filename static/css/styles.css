@@ -8,8 +8,9 @@
     --room-blue: #A2D2FF;
     --room-laundry: #D0F0C0;
     --text-dark: #2D3436;
-    --accent-green: #2ECC71;
-    --accent-dark: #27AE60;
+    /* Primary CTA green (legacy, less neon). */
+    --accent-green: #1d8449;
+    --accent-dark: #166c3b;
     --accent-maroon: #691F3D;
     --border-gray: #DFE6E9;
     --rita-red: #D63031;
@@ -17,6 +18,33 @@
 
 body {
     margin: 0;
+}
+
+/* ============================================================
+   CTA button sizing
+   Use `.btn-cta` alongside existing color classes
+   (e.g., `.btn-primary btn-cta`, `.btn btn-success btn-cta`).
+   `.btn.btn-cta` intentionally has higher specificity than
+   Bootstrap's `.btn` so it can override padding/font-size.
+   ============================================================ */
+.btn-cta,
+.btn.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 48px;
+    border-radius: 30px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.btn-cta:focus-visible,
+.btn.btn-cta:focus-visible {
+    outline: 3px solid rgba(182, 215, 168, 0.65);
+    outline-offset: 2px;
 }
 
 .site-nav {
