@@ -18,6 +18,7 @@ const itemsById  = {};
 const db         = {};
 const roomColors = {};
 const roomList   = [];
+let pendingResetIds = [];
 
 // ── Fisher-Yates shuffle ──────────────────────────────────────
 function shuffle(arr) {
@@ -282,6 +283,7 @@ function removeItem(id) {
 // ── Reset / Restart ───────────────────────────────────────────
 function resetItems() {
     Promise.all(state.applied.map(i => apiRemoveItem(i.id)));
+    pendingResetIds = [];
     state.applied = []; state.budget = config.budget; state.co2 = 0; state.goalEverMet = false;
     document.querySelectorAll('.applied-card').forEach(el => el.remove());
     document.getElementById('budget-empty-hint').style.display = 'none';
@@ -298,6 +300,7 @@ function tryDifferentBudget() {
     stopDragGuide();
     document.getElementById('congrats-overlay').style.display = 'none';
     Promise.all(state.applied.map(i => apiRemoveItem(i.id)));
+    pendingResetIds = [];
     document.querySelectorAll('.applied-card').forEach(el => el.remove());
     state.applied = []; state.budget = 0; state.co2 = 0; state.goalEverMet = false; state.currentBtnTier = null;
     config.budget = 0; config.goal = 0;
@@ -425,6 +428,11 @@ function updateStats() {
 
 // ── Init from housing selection ───────────────────────────────
 function initPlanner(budget) {
+    if (pendingResetIds.length) {
+        Promise.all(pendingResetIds.map(apiRemoveItem)).catch(() => {});
+        pendingResetIds = [];
+    }
+
     config.budget    = budget;
     config.goal      = parseFloat(computeGoal(budget).toFixed(1));
     state.budget     = budget;
@@ -449,6 +457,7 @@ function restoreFromBackend(savedPlan) {
     state.applied = applied;
     state.goalEverMet = false;
     state.currentBtnTier = null;
+    pendingResetIds = [];
     document.getElementById('setup-overlay').style.display = 'none';
     document.getElementById('congrats-overlay').style.display = 'none';
     applied.forEach(addAppliedCard);
@@ -472,7 +481,17 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => setRoom(btn.dataset.room, btn.dataset.color));
     });
 
-    const savedPlan = window.INITIAL_STATE.plan || {};
+    const initialState = window.INITIAL_STATE || {};
+    const savedPlan = initialState.plan || {};
+    const forceSetup = Boolean(initialState.forceSetup);
+    pendingResetIds = Array.isArray(savedPlan.applied) ? [...savedPlan.applied] : [];
+
+    if (forceSetup) {
+        document.getElementById('setup-overlay').style.display = 'flex';
+        document.getElementById('congrats-overlay').style.display = 'none';
+        return;
+    }
+
     if (savedPlan.budget) {
         restoreFromBackend(savedPlan);
         if (!(savedPlan.applied && savedPlan.applied.length)) startDragGuide();

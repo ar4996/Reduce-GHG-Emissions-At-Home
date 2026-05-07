@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Stage 1: Quiz</h2>
+    <h2>Knowledge Check</h2>
     <span class="badge bg-secondary">Question {{ q_num }} of {{ total }}</span>
 </div>
 
@@ -52,8 +52,8 @@ $(function () {
             if (qNum < total) {
                 window.location.href = '/quiz/' + (qNum + 1);
             } else {
-                // After the last quiz question, move the user into Stage 2 (the planner).
-                window.location.href = '/plan';
+                // After the last quiz question, move the user into home setup.
+                window.location.href = '/quiz/setup';
             }
         }).fail(function () {
             $('#status').text('Could not save your answer. Please try again.');

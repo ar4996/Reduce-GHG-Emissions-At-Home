@@ -31,6 +31,7 @@ import json
 import os
 import random
 from datetime import datetime
+from threading import RLock
 
 app = Flask(__name__)
 
@@ -38,6 +39,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 USER_DATA_FILE = os.path.join(BASE_DIR, "user_data.json")
 FILE_ENCODING = "utf-8"
+USER_DATA_LOCK = RLock()
 
 
 def _empty_state():
@@ -56,16 +58,63 @@ def load_json(filename):
 sustainable_living_opportunities = load_json("lessons.json")
 
 
+def normalize_user_data(data):
+    state = _empty_state()
+    if not isinstance(data, dict):
+        return state
+
+    state.update(data)
+
+    learning = data.get("learning")
+    state["learning"] = learning if isinstance(learning, list) else []
+
+    plan = data.get("plan")
+    merged_plan = _empty_state()["plan"]
+    if isinstance(plan, dict):
+        merged_plan.update(plan)
+        applied = plan.get("applied")
+        merged_plan["applied"] = applied if isinstance(applied, list) else []
+    state["plan"] = merged_plan
+
+    return state
+
+
 def load_user_data():
-    if os.path.exists(USER_DATA_FILE):
+    if not os.path.exists(USER_DATA_FILE):
+        return _empty_state()
+
+    with USER_DATA_LOCK:
         with open(USER_DATA_FILE, "r", encoding=FILE_ENCODING) as f:
-            return json.load(f)
-    return _empty_state()
+            raw_text = f.read()
+
+    if not raw_text.strip():
+        return _empty_state()
+
+    try:
+        return normalize_user_data(json.loads(raw_text))
+    except json.JSONDecodeError:
+        stripped_text = raw_text.lstrip()
+        try:
+            data, end = json.JSONDecoder().raw_decode(stripped_text)
+        except json.JSONDecodeError:
+            return _empty_state()
+
+        cleaned_data = normalize_user_data(data)
+        if stripped_text[end:].strip():
+            save_user_data(cleaned_data)
+        return cleaned_data
 
 
 def save_user_data(data):
-    with open(USER_DATA_FILE, "w", encoding=FILE_ENCODING) as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    normalized = normalize_user_data(data)
+    temp_file = f"{USER_DATA_FILE}.tmp"
+
+    with USER_DATA_LOCK:
+        with open(temp_file, "w", encoding=FILE_ENCODING) as f:
+            json.dump(normalized, f, indent=2, ensure_ascii=False)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(temp_file, USER_DATA_FILE)
 
 
 def items_by_id():
@@ -177,14 +226,23 @@ def quiz_binary():
     return render_template("binary.html", questions=binary_questions_for_client())
 
 
+def planner_view_context(force_setup=False):
+    return {
+        "plan": load_user_data().get("plan") or {},
+        "items": load_json("planner_items.json"),
+        "rooms": load_json("rooms.json"),
+        "force_setup": force_setup,
+    }
+
+
+@app.route("/quiz/setup")
+def quiz_setup():
+    return render_template("planner.html", **planner_view_context(force_setup=True))
+
+
 @app.route("/quiz/1")
 def quiz_planner():
-    return render_template(
-        "planner.html",
-        plan=load_user_data().get("plan") or {},
-        items=load_json("planner_items.json"),
-        rooms=load_json("rooms.json"),
-    )
+    return render_template("planner.html", **planner_view_context())
 
 
 # ==================== JSON API ====================

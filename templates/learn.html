@@ -65,7 +65,7 @@
         {% if lesson_num < total %}
             <a href="{{ url_for('learn', lesson_num=lesson_num+1) }}" class="btn-primary">Next →</a>
         {% else %}
-            <a href="{{ url_for('quiz_planner') }}" class="btn-primary">Start the planner →</a>
+            <a href="{{ url_for('quiz_setup') }}" class="btn-primary">Start planning →</a>
         {% endif %}
     </nav>
 </main>

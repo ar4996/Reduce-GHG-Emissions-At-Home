@@ -4,7 +4,7 @@
     const rowsEl = document.getElementById('rows');
     const submitBtn = document.getElementById('submit-btn');
     const submitHint = document.getElementById('submit-hint');
-    const toPlannerLnk = document.getElementById('to-planner-link');
+    const toSetupLink = document.getElementById('to-planner-link');
     const progressCount = document.getElementById('progress-count');
     const progressFill = document.getElementById('progress-fill');
 
@@ -124,12 +124,12 @@
 
         submitBtn.disabled = false;
         submitBtn.classList.add('is-complete');
-        submitBtn.textContent = 'Planner Unlocked';
+        submitBtn.textContent = 'Home Setup Ready';
         submitHint.classList.remove('is-error');
-        submitHint.textContent = 'All correct - click Planner Unlocked or use the planner link above.';
+        submitHint.textContent = 'All correct - continue to home setup when you are ready.';
 
-        if (toPlannerLnk) {
-            toPlannerLnk.classList.remove('nav-hidden');
+        if (toSetupLink) {
+            toSetupLink.classList.remove('nav-hidden');
         }
     }
 
@@ -147,7 +147,7 @@
 
     submitBtn.addEventListener('click', () => {
         if (locked) {
-            window.location.href = (toPlannerLnk && toPlannerLnk.href) || '/quiz/1';
+            window.location.href = (toSetupLink && toSetupLink.href) || '/quiz/setup';
             return;
         }
 
