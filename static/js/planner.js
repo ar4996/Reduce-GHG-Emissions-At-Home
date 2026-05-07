@@ -173,14 +173,16 @@ async function downloadCertPDF() {
 let _guideActive = false, _guideEl = null, _guideTimer = null;
 function startDragGuide() {
     stopDragGuide();
-    setTimeout(() => {
+    // Don't run while housing selection screen is active
+    if (document.getElementById('setup-overlay').style.display !== 'none') return;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
         if (!document.querySelector('#card-container .change-card')) return;
         _guideActive = true;
         _guideEl = document.createElement('div'); _guideEl.id = 'drag-guide-anim';
         _guideEl.style.position = 'fixed';
         _guideEl.innerHTML = '<div class="drag-guide-card"><span class="drag-guide-hand">🫳</span><span class="drag-guide-label">drag to room window</span></div>';
         document.body.appendChild(_guideEl); _runGuideLoop();
-    }, 160);
+    }));
 }
 function stopDragGuide() { _guideActive = false; if (_guideTimer) { clearTimeout(_guideTimer); _guideTimer = null; } if (_guideEl) { _guideEl.remove(); _guideEl = null; } }
 function _runGuideLoop() {
@@ -188,6 +190,11 @@ function _runGuideLoop() {
     const fc = document.querySelector('#card-container .change-card'), dz = document.getElementById('drop-zone');
     if (!fc || !dz) return;
     const sr = fc.getBoundingClientRect(), dr = dz.getBoundingClientRect();
+    // If elements have no layout yet, retry after a frame
+    if (sr.width === 0 || dr.width === 0) {
+        _guideTimer = setTimeout(_runGuideLoop, 200);
+        return;
+    }
     const sx = sr.left + sr.width * 0.5, sy = sr.top + sr.height * 0.5, ex = dr.left + dr.width * 0.24, ey = dr.top + dr.height * 0.28;
     const el = _guideEl, set = p => Object.assign(el.style, p);
     set({ transition:'none', opacity:'0', left:sx+'px', top:sy+'px', transform:'translate(-50%,-50%) scale(1) rotate(0deg)' });
@@ -224,13 +231,12 @@ function setRoom(name, color) {
     state.currentRoom = name;
     document.getElementById('room-display-title').textContent = `Map: ${name}`;
     document.getElementById('sidebar-title').textContent      = `${name} Changes`;
-    document.getElementById('drop-zone').style.backgroundColor = color;
     document.querySelectorAll('.room-nav-btn').forEach(btn => {
         const active = btn.dataset.room === name;
         btn.classList.toggle('active', active);
-        btn.style.background  = active ? color : '';
-        btn.style.borderColor = active ? color : '';
-        btn.style.color       = active ? '#2d5a27' : '';
+        btn.style.background  = active ? '#691F3D' : '';
+        btn.style.borderColor = active ? '#691F3D' : '';
+        btn.style.color       = active ? '#ffffff'  : '';
     });
     render();
 }
@@ -250,8 +256,6 @@ dz.ondrop      = e => {
     stopDragGuide();
     document.getElementById('drag-hint').style.display = 'none';
     playDropSound();
-    const color = roomColors[item.room];
-    if (color) { dz.style.backgroundColor = color + '99'; setTimeout(() => { dz.style.backgroundColor = roomColors[state.currentRoom]; }, 400); }
     updateStats(); addAppliedCard(item); render();
 };
 
@@ -291,6 +295,7 @@ function restartPlanner() {
     document.body.appendChild(form); form.submit();
 }
 function tryDifferentBudget() {
+    stopDragGuide();
     document.getElementById('congrats-overlay').style.display = 'none';
     Promise.all(state.applied.map(i => apiRemoveItem(i.id)));
     document.querySelectorAll('.applied-card').forEach(el => el.remove());
@@ -431,7 +436,7 @@ function initPlanner(budget) {
     apiSaveBudget(config.budget, config.goal);
     updateStats();
     setRoom(roomList[0], roomColors[roomList[0]]);
-    startDragGuide();
+    setTimeout(startDragGuide, 300);
 }
 
 function restoreFromBackend(savedPlan) {
@@ -472,8 +477,6 @@ document.addEventListener('DOMContentLoaded', () => {
         restoreFromBackend(savedPlan);
         if (!(savedPlan.applied && savedPlan.applied.length)) startDragGuide();
     } else {
-        render();
         document.getElementById('congrats-overlay').style.display = 'none';
-        startDragGuide();
     }
 });

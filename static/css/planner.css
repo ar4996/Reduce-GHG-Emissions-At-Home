@@ -18,7 +18,7 @@ body.page-planner {
 }
 #setup-overlay {
     display: flex; align-items: center; justify-content: center;
-    padding: 40px 24px; overflow: auto;
+    padding: 40px 24px; overflow: auto; z-index: 2500;
     background:
         radial-gradient(circle at top left, rgba(182, 215, 168, 0.92), transparent 28%),
         radial-gradient(circle at top right, rgba(147, 196, 125, 0.28), transparent 24%),
@@ -141,7 +141,7 @@ body.page-planner {
     transition: transform 0.15s, border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .nav-btn:hover { transform: translateY(-1px); border-color: #b6d7a8; background: #f4f9f2; }
-.nav-btn.active { border-color: #27ae60; background: linear-gradient(135deg, #2ecc71 0%, #6ad98e 100%); color: white; box-shadow: 0 12px 22px rgba(46,204,113,0.18); }
+.nav-btn.active { border-color: #691F3D; background: #691F3D; color: white; box-shadow: 0 8px 18px rgba(105,31,61,0.22); }
 .nav-btn.danger { border-color: #f2d4d4; color: var(--rita-red); }
 .nav-btn.danger:hover { background: #fff3f3; }
 
@@ -150,6 +150,7 @@ body.page-planner {
     width: 100%; flex: 1; min-height: 320px; padding: 18px;
     display: flex; flex-wrap: wrap; align-content: flex-start; gap: 10px;
     overflow-y: auto; position: relative;
+    background: #f0f0f0;
     border: 3px dashed rgba(116,27,71,0.55); border-radius: 28px; box-sizing: border-box;
     transition: background 0.3s, border-color 0.2s;
 }
