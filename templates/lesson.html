@@ -50,7 +50,7 @@
                     <tr>
                         <th>Opportunity</th>
                         <th>Description</th>
-                        <th>Cost-Effectiveness of CO₂ Emissions Reduction</th>
+                        <th class="co2-data d-none">CO₂ Emissions Reduction</th>
                     </tr>
                 </thead>
 
@@ -59,24 +59,16 @@
                 </tbody>
             </table>
 
-            <div id="next-room-container" class="mt-3 d-none">
-                {% if next_index is not none %}
-                    <button
-                        id="next-room-btn"
-                        class="btn btn-success"
-                        data-next-index="{{ next_index }}"
-                    >
-                        Go to the {{ room_data.next_room }}
-                    </button>
-                {% else %}
-                    <button
-                        id="next-room-btn"
-                        class="btn btn-success"
-                        data-next-index="None"
-                    >
-                        Congrats on finishing. Test yourself!
-                    </button>
-                {% endif %}
+            <div id="show-co2-container" class="text-center mt-3 d-none">
+              <button id="show-co2-btn" class="btn btn-success">
+                  Show CO₂ Emissions Reduction Data
+              </button>
+            </div>
+
+            <div id="next-room-container" class="text-center mt-3 d-none">
+              <button id="next-room-btn" class="btn btn-success" data-next-index="{{ next_index }}">
+                  Go to the Next Room
+              </button>
             </div>
 
         </div>

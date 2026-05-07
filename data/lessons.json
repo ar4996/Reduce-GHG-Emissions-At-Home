@@ -9,7 +9,7 @@
         "label": "Fridge",
         "opportunity": "Optimize Fridge Temperature",
         "description": "Slightly warmer fridge settings can reduce energy use while still keeping food safe.",
-        "impact_cost_effectiveness": "High",
+        "impact": "0.10",
         "hotspot": {
           "left": "77%",
           "top": "13%",
@@ -22,7 +22,7 @@
         "label": "Microwave",
         "opportunity": "Unplug Phantoms",
         "description": "Devices draw power even when \"off\"",
-        "impact_cost_effectiveness": "High",
+        "impact": "0.15",
         "hotspot": {
           "left": "15%",
           "top": "42%",
@@ -35,7 +35,7 @@
         "label": "Gas cooktop",
         "opportunity": "Induction Cooktop",
         "description": "Switching from a gas cooktop to an induction cooktop eliminates gas combustion in the kitchen.",
-        "impact_cost_effectiveness": "Low",
+        "impact": "0.64",
         "hotspot": {
           "left": "30%",
           "top": "50%",
@@ -55,7 +55,7 @@
         "label": "Smart thermostat",
         "opportunity": "Smart Thermostat",
         "description": "Adjusts automatically when you're away or asleep",
-        "impact_cost_effectiveness": "Medium",
+        "impact": "0.50",
         "hotspot": {
           "left": "2%",
           "top": "34%",
@@ -68,7 +68,7 @@
         "label": "Curtains",
         "opportunity": "Thermal Curtains",
         "description": "Reduce heat transfer through glass",
-        "impact_cost_effectiveness": "Medium",
+        "impact": "0.25",
         "hotspot": {
           "left": "31%",
           "top": "12%",
@@ -79,9 +79,9 @@
       {
         "item_key": "light_bulbs",
         "label": "Light bulbs",
-        "opportunity": "LED Light Bulbs",
+        "opportunity": "30 LED Light Bulbs",
         "description": "75% less energy than incandescent light bulbs",
-        "impact_cost_effectiveness": "High",
+        "impact": "1.80",
         "hotspot": {
           "left": "43%",
           "top": "0%",
@@ -101,7 +101,7 @@
         "label": "Water heater",
         "opportunity": "Heat Pump Water Heater",
         "description": "60% less electricity than a standard water heater",
-        "impact_cost_effectiveness": "Low",
+        "impact": "0.90",
         "hotspot": {
           "left": "51%",
           "top": "6%",
@@ -114,7 +114,7 @@
         "label": "Showerhead",
         "opportunity": "Low Flow Showerheads",
         "description": "less hot water used = less energy to heat it",
-        "impact_cost_effectiveness": "Medium",
+        "impact": "0.15",
         "hotspot": {
           "left": "73%",
           "top": "15%",
@@ -127,7 +127,7 @@
         "label": "Shower controls",
         "opportunity": "5-Minute Shower Goal",
         "description": "Hot water is the real cost of long showers",
-        "impact_cost_effectiveness": "High",
+        "impact": "0.10",
         "hotspot": {
           "left": "80%",
           "top": "45%",
@@ -147,7 +147,7 @@
         "label": "Washer",
         "opportunity": "Cold Water Wash",
         "description": "90% of washing machine energy goes to heating water",
-        "impact_cost_effectiveness": "High",
+        "impact": "0.10",
         "hotspot": {
           "left": "25%",
           "top": "48%",
@@ -160,7 +160,7 @@
         "label": "Lint filter",
         "opportunity": "Clean Lint Filter",
         "description": "A clogged filter makes the dryer run longer",
-        "impact_cost_effectiveness": "High",
+        "impact": "0.05",
         "hotspot": {
           "left": "64%",
           "top": "42%",
@@ -173,7 +173,7 @@
         "label": "Dryer",
         "opportunity": "Air Drying Rack",
         "description": "Dryers are among the highest-energy appliances",
-        "impact_cost_effectiveness": "High",
+        "impact": "1.00",
         "hotspot": {
           "left": "49%",
           "top": "54%",

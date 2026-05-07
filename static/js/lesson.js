@@ -33,22 +33,33 @@ $(document).ready(function () {
         const existingRow = $(`#opportunity-table-body tr[data-item="${itemKey}"]`);
 
         if (existingRow.length === 0) {
-            const costClass = getCostEffectivenessClass(itemData.impact_cost_effectiveness);
-
             const newRow = `
                 <tr data-item="${itemKey}">
                     <td>${itemData.opportunity}</td>
                     <td>${itemData.description}</td>
-                    <td class="${costClass}">${itemData.impact_cost_effectiveness}</td>
+                    <td class="co2-data d-none">${itemData.impact}</td>
                 </tr>
             `;
 
             $("#opportunity-table-body").append(newRow);
         }
 
+        // After all hotspots are clicked, show the CO₂ reveal button.
+        // The CO₂ data itself is still hidden at this point.
         if (clickedItems.size === totalHotspots) {
-            $("#next-room-container").removeClass("d-none");
+            $("#show-co2-container").removeClass("d-none");
         }
+    });
+
+    $("#show-co2-btn").on("click", function () {
+        // Reveal the CO₂ emissions reduction data in the table.
+        $(".co2-data").removeClass("d-none");
+
+        // Hide this button after it is clicked.
+        $("#show-co2-container").addClass("d-none");
+
+        // Now show the next room button.
+        $("#next-room-container").removeClass("d-none");
     });
 
     $("#next-room-btn").on("click", function () {
@@ -61,15 +72,4 @@ $(document).ready(function () {
         }
     });
 
-    function getCostEffectivenessClass(value) {
-      if (value === "High") {
-          return "cost-high";
-      } else if (value === "Medium") {
-          return "cost-medium";
-      } else if (value === "Low") {
-          return "cost-low";
-      } else {
-          return "";
-      }
-    }
 });
