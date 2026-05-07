@@ -2,7 +2,6 @@ $(document).ready(function () {
     const opportunities = JSON.parse($("#room-opportunities-data").text());
 
     // Apply hotspot positions from data attributes.
-    // This avoids putting Jinja variables directly inside an inline style attribute.
     $(".hotspot").each(function () {
         $(this).css({
             left: $(this).data("left"),
@@ -14,12 +13,6 @@ $(document).ready(function () {
 
     const clickedItems = new Set();
     const totalHotspots = $(".hotspot").length;
-
-    const nextIndex = $("#next-room-btn").data("next-index");
-
-    if (nextIndex === null || nextIndex === undefined || nextIndex === "None") {
-        $("#next-room-btn").text("Congrats on finishing! Test Yourself");
-    }
 
     $(".hotspot").on("click", function () {
         const itemKey = $(this).data("item");
@@ -50,14 +43,20 @@ $(document).ready(function () {
             $("#opportunity-table-body").append(newRow);
         }
 
+        // After all 3 hotspots are clicked, show the CO₂ reveal button.
         if (clickedItems.size === totalHotspots) {
             $("#show-co2-container").removeClass("d-none");
         }
     });
 
     $("#show-co2-btn").on("click", function () {
+        // Reveal the CO₂ emissions reduction header and table cells.
         $(".co2-data").removeClass("d-none");
+
+        // Hide the CO₂ reveal button.
         $("#show-co2-container").addClass("d-none");
+
+        // Show the dynamic next-room / quiz button.
         $("#next-room-container").removeClass("d-none");
     });
 
@@ -70,5 +69,4 @@ $(document).ready(function () {
             window.location.href = "/learn/" + nextIndex;
         }
     });
-
 });

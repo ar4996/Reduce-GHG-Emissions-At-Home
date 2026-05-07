@@ -50,7 +50,7 @@
                     <tr>
                         <th>Opportunity</th>
                         <th>Description</th>
-                        <th class="co2-data d-none">CO₂ Emissions Reduction (T)</th>
+                        <th class="co2-data d-none">CO₂ Emissions Reduction</th>
                     </tr>
                 </thead>
 
@@ -60,15 +60,23 @@
             </table>
 
             <div id="show-co2-container" class="text-center mt-3 d-none">
-              <button id="show-co2-btn" class="btn btn-success">
-                  Show CO₂ Emissions Reduction Data
-              </button>
+                <button id="show-co2-btn" class="btn btn-success">
+                    Show CO₂ Emissions Reduction Data
+                </button>
             </div>
 
             <div id="next-room-container" class="text-center mt-3 d-none">
-              <button id="next-room-btn" class="btn btn-success" data-next-index="{{ next_index }}">
-                  Go to the Next Room
-              </button>
+                <button
+                    id="next-room-btn"
+                    class="btn btn-success"
+                    data-next-index="{{ next_index }}"
+                >
+                    {% if room_data.next_room %}
+                        Go to {{ room_data.next_room }}
+                    {% else %}
+                        Congrats on finishing! Test Yourself
+                    {% endif %}
+                </button>
             </div>
 
         </div>
