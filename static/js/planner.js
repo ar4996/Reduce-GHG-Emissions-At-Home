@@ -375,7 +375,7 @@ function submitPlan() {
 function updateStats() {
     document.getElementById('total-budget-val').textContent = `$${config.budget.toLocaleString()}`;
     document.getElementById('budget-val').textContent       = `$${state.budget.toLocaleString()}`;
-    document.getElementById('co2-val').textContent          = `${config.goal}T`;
+    document.getElementById('co2-val').textContent          = `${config.goal.toFixed(2)}T`;
 
     const overBudget = state.budget < 0;
     const hint = document.getElementById('budget-empty-hint');
@@ -385,10 +385,10 @@ function updateStats() {
     } else { hint.style.display = 'none'; }
 
     const cd = document.getElementById('cert-co2-display');
-    if (cd) cd.innerHTML = `${state.co2.toFixed(1)}<span class="cert-score-unit">T CO<sub>2</sub></span>`;
+    if (cd) cd.innerHTML = `${state.co2.toFixed(2)}<span class="cert-score-unit">T CO<sub>2</sub></span>`;
     const cs = document.getElementById('cert-budget-sub');
     if (cs) cs.textContent = `reduced per year · $${state.budget.toLocaleString()} remaining under budget`;
-    document.getElementById('congrats-text').innerHTML = `You reduced <strong>${state.co2.toFixed(1)} tons of CO₂</strong> within your $${config.budget.toLocaleString()} budget!`;
+    document.getElementById('congrats-text').innerHTML = `You reduced <strong>${state.co2.toFixed(2)} tons of CO₂</strong> within your $${config.budget.toLocaleString()} budget!`;
 
     const canSubmit = config.goal > 0 && state.applied.length > 0 && state.budget >= 0;
     const sb = document.getElementById('goal-btn');
