@@ -206,7 +206,7 @@
 .opportunity-table {
     width: 100%;
     table-layout: fixed;
-    font-size: 0.95rem;
+    font-size: 16px;
     line-height: 1.35;
     background-color: #ffffff;
     border: 1px solid var(--border-gray);
@@ -226,22 +226,17 @@
 }
 
 .opportunity-table thead th {
-    background-color: rgba(189, 224, 254, 0.55);
-    color: #355029;
-    font-size: 0.74rem;
+    background-color: rgba(238, 241, 243, 0.96);
+    color: var(--accent-dark);
     font-weight: 900;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     white-space: normal;
+    text-align: left;
 }
 
 .opportunity-table thead th:nth-child(1),
 .opportunity-table thead th:nth-child(2) {
     white-space: nowrap;
-}
-
-.opportunity-table thead th:nth-child(3) {
-    text-align: right;
 }
 
 .opportunity-table th:nth-child(1),
@@ -270,7 +265,6 @@
 }
 
 .opportunity-table tbody td:nth-child(3) {
-    text-align: right;
     font-variant-numeric: tabular-nums;
 }
 
@@ -279,11 +273,7 @@
 }
 
 .opportunity-table tbody tr:nth-child(even) {
-    background: rgba(238, 241, 243, 0.55);
-}
-
-.opportunity-table tbody tr:hover {
-    background: rgba(189, 224, 254, 0.28);
+    background: rgba(238, 241, 243, 0.96);
 }
 
 /* Next room / quiz button */
