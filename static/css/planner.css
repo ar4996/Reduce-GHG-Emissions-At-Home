@@ -56,19 +56,18 @@ body.page-planner {
 
 /* ── Top nav bar ───────────────────────────────────────────── */
 .planner-topnav {
-    flex-shrink: 0; position: relative; display: flex; align-items: center;
-    justify-content: space-between; padding: 10px 24px;
+    flex-shrink: 0; display: flex; align-items: center;
+    padding: 10px 24px;
     background: rgba(238,241,243,0.96); backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(45,52,54,0.08); z-index: 1500;
 }
-.topnav-left  { display: flex; gap: 10px; }
-.topnav-right { display: flex; gap: 10px; }
+.topnav-left  { flex: 1; display: flex; gap: 10px; justify-content: flex-start; }
+.topnav-right { flex: 1; display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
 .topnav-brand {
-    position: absolute; left: 50%; transform: translateX(-50%);
     font-size: 1.1rem; font-weight: 900; color: #2d5a27;
     letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
-    pointer-events: none;
 }
+.topnav-spacer { display: inline-block; width: 80px; }
 .topnav-btn {
     display: inline-flex; align-items: center; justify-content: center;
     padding: 9px 16px; border: 1.5px solid #d5e6cd; border-radius: 999px;
@@ -200,19 +199,6 @@ body.page-planner {
 .cert-globe { font-size: 4rem; margin-bottom: 8px; }
 .cert-title { margin: 0 0 8px; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; color: #2d5a27; }
 .cert-subtitle { margin: 0; color: #3a6b32; font-size: 1.1rem; font-weight: 600; }
-
-/* ── Badges ────────────────────────────────────────────────── */
-.cert-badges-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
-.badge-widget { padding: 18px 12px 16px; border-radius: 20px; text-align: center; border: 2px solid #e0e2e4; background: rgba(255,255,255,0.5); opacity: 0.4; filter: grayscale(1); transition: all 0.35s; position: relative; overflow: hidden; }
-.badge-widget.badge-earned { opacity: 1 !important; filter: none !important; background: #fff !important; animation: badge-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
-.badge-widget.badge-unearned { opacity: 0.32; filter: grayscale(1); }
-@keyframes badge-pop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.badge-widget.badge-glinting::after { content: ''; position: absolute; top: 0; left: -80%; width: 60%; height: 100%; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.55), transparent); animation: badge-glint 0.8s ease-out forwards; }
-@keyframes badge-glint { to { left: 140%; } }
-.badge-icon-wrap { font-size: 2.6rem; margin-bottom: 6px; }
-.badge-tier-name { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: #636e72; }
-.badge-threshold { margin-top: 6px; font-size: 0.82rem; font-weight: 800; color: var(--text-dark); }
-.badge-desc { margin-top: 4px; font-size: 0.7rem; color: #636e72; }
 
 /* ── Rejection stamp ───────────────────────────────────────── */
 .cert-overlay.rejected .cert-card { background: #e8e8e8; }

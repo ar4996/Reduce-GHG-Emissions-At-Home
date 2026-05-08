@@ -10,7 +10,7 @@ let state  = {
     currentRoom  : '',
     applied      : [],
     goalEverMet  : false,
-    badgeTiers   : { gold: 0, silver: 0, bronze: 0 },
+    maxImpact    : 0,
     currentBtnTier: null,
 };
 
@@ -44,26 +44,24 @@ function shuffle(arr) {
     roomList.forEach(key => { db[key] = shuffle(db[key]); });
 })();
 
-// ── Badge tier computation (top 3 achievable paths) ──────────
-function computeBadgeTiers(budget) {
+// ── Max achievable impact ─────────────────────────────────────
+function computeMaxImpact(budget) {
     const freeItems = Object.values(itemsById).filter(i => i.cost === 0);
     const paidItems = Object.values(itemsById).filter(i => i.cost > 0);
     const freeTotal = Math.round(freeItems.reduce((s, i) => s + i.impact, 0) * 100) / 100;
-    const achievable = new Set();
+    let best = freeTotal;
     const n = paidItems.length;
     for (let mask = 0; mask < (1 << n); mask++) {
         let cost = 0, impact = 0;
         for (let j = 0; j < n; j++) {
             if (mask & (1 << j)) { cost += paidItems[j].cost; impact += paidItems[j].impact; }
         }
-        if (cost <= budget) achievable.add(Math.round((freeTotal + impact) * 100) / 100);
+        if (cost <= budget) {
+            const total = Math.round((freeTotal + impact) * 100) / 100;
+            if (total > best) best = total;
+        }
     }
-    const sorted = Array.from(achievable).sort((a, b) => b - a);
-    return {
-        gold  : sorted[0] ?? 0,
-        silver: sorted[1] ?? sorted[0] ?? 0,
-        bronze: sorted[2] ?? sorted[1] ?? sorted[0] ?? 0,
-    };
+    return best;
 }
 
 // ── Goal formula ──────────────────────────────────────────────
@@ -97,20 +95,10 @@ function playNote(ctx, freq, delay, duration, type = 'sine', vol = 0.25) {
 function playDropSound() {
     try { const ctx = new (window.AudioContext || window.webkitAudioContext)(); playNote(ctx, 528, 0, 0.50); } catch (_) {}
 }
-function playTierChangeSound(tier) {
+function playCelebrationSound() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        if (tier === 'bronze') playNote(ctx, 440, 0, 0.55, 'sine', 0.14);
-        else if (tier === 'silver') { playNote(ctx, 523, 0, 0.45, 'sine', 0.14); playNote(ctx, 659, 0.20, 0.45, 'sine', 0.11); }
-        else { playNote(ctx, 523, 0, 0.40, 'sine', 0.14); playNote(ctx, 659, 0.17, 0.40, 'sine', 0.11); playNote(ctx, 784, 0.34, 0.55, 'sine', 0.11); }
-    } catch (_) {}
-}
-function playCelebrationSound(tier) {
-    try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        if (tier === 'bronze') [[392,0,.38],[523,.22,.38],[659,.44,.70]].forEach(([f,d,dur]) => playNote(ctx, f, d, dur, 'triangle', 0.22));
-        else if (tier === 'silver') [[392,0,.28],[523,.20,.28],[659,.40,.28],[784,.60,.95]].forEach(([f,d,dur]) => playNote(ctx, f, d, dur, 'sine', 0.24));
-        else [[523,0,.14],[587,.13,.14],[659,.26,.14],[698,.39,.14],[784,.52,.14],[880,.65,.14],[1047,.78,1.2]].forEach(([f,d,dur]) => playNote(ctx, f, d, dur, 'sine', 0.22));
+        [[523,0,.14],[587,.13,.14],[659,.26,.14],[698,.39,.14],[784,.52,.14],[880,.65,.14],[1047,.78,1.2]].forEach(([f,d,dur]) => playNote(ctx, f, d, dur, 'sine', 0.22));
     } catch (_) {}
 }
 function playDrumRoll() {
@@ -119,14 +107,14 @@ function playDrumRoll() {
         ctx.resume().then(() => { for (let i = 0; i < 22; i++) playNote(ctx, 160 + Math.random() * 30, i * (0.85 / 22), 0.035, 'triangle', 0.04 + (i / 22) * 0.13); });
     } catch (_) {}
 }
-function launchConfetti(tier) {
+function launchConfetti() {
     const canvas = document.createElement('canvas');
     canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3500;';
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     document.body.appendChild(canvas);
     const cx = canvas.getContext('2d');
-    const colors = { bronze:['#e8a84c','#fce5c0','#cd7f32','#fffaf0','#b8860b'], silver:['#c0c0c0','#e8edf2','#a8b8c8','#ffffff','#8899aa'], gold:['#d4a017','#fff0a0','#2ecc71','#ffffff','#f9e04b'] }[tier] || [];
-    const count = tier === 'gold' ? 130 : tier === 'silver' ? 85 : 55;
+    const colors = ['#d4a017','#fff0a0','#2ecc71','#ffffff','#f9e04b'];
+    const count = 130;
     const pieces = Array.from({ length: count }, () => ({ x: Math.random() * canvas.width, y: -20 - Math.random() * 80, w: Math.random() * 7 + 3, h: Math.random() * 18 + 7, col: colors[Math.floor(Math.random() * colors.length)], vx: (Math.random() - 0.5) * 2.5, vy: Math.random() * 3.5 + 1.5, ang: Math.random() * Math.PI * 2, av: (Math.random() - 0.5) * 0.12 }));
     let start = null;
     (function draw(ts) { if (!start) start = ts; const pct = Math.min((ts - start) / 4000, 1); cx.clearRect(0, 0, canvas.width, canvas.height); pieces.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.ang += p.av; cx.save(); cx.globalAlpha = Math.max(0, 1 - pct * 1.5); cx.translate(p.x, p.y); cx.rotate(p.ang); cx.fillStyle = p.col; cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); cx.restore(); }); if (pct < 1) requestAnimationFrame(draw); else canvas.remove(); })(performance.now());
@@ -308,24 +296,9 @@ function tryDifferentBudget() {
 }
 
 // ── Badge helpers ─────────────────────────────────────────────
-function getBadgeTier(co2) {
-    if (co2 >= state.badgeTiers.gold)   return 'gold';
-    if (co2 >= state.badgeTiers.silver) return 'silver';
-    if (co2 >= state.badgeTiers.bronze) return 'bronze';
+function isPlanAccepted(co2) {
+    if (co2 >= state.maxImpact) return true;
     return null;
-}
-function updateBadgeWidgets(earnedTier) {
-    ['bronze','silver','gold'].forEach(t => {
-        const w = document.getElementById(`badge-${t}`); if (!w) return;
-        w.classList.toggle('badge-earned', t === earnedTier);
-        w.classList.toggle('badge-unearned', t !== earnedTier);
-    });
-    const g = document.getElementById('gold-threshold'), s = document.getElementById('silver-threshold'), b = document.getElementById('bronze-threshold');
-    if (g) g.textContent = `MAX: ${state.badgeTiers.gold.toFixed(1)}T CO₂`;
-    if (s) s.textContent = `2nd: ${state.badgeTiers.silver.toFixed(1)}T CO₂`;
-    if (b) b.textContent = `3rd: ${state.badgeTiers.bronze.toFixed(1)}T CO₂`;
-    const earnedEl = document.getElementById(`badge-${earnedTier}`);
-    if (earnedEl) { earnedEl.classList.remove('badge-glinting'); void earnedEl.offsetWidth; earnedEl.classList.add('badge-glinting'); }
 }
 function updateCertPlanList() {
     const el = document.getElementById('cert-plan-list'); if (!el) return;
@@ -341,7 +314,7 @@ function updateCertPlanList() {
 }
 
 // ── Show / Reject overlays ────────────────────────────────────
-function showCertOverlay(tier) {
+function showCertOverlay() {
     const ov = document.getElementById('congrats-overlay');
     ov.classList.remove('rejected'); ov.style.display = 'flex';
     const cc = ov.querySelector('.cert-card'); if (cc) cc.scrollTop = 0;
@@ -352,10 +325,10 @@ function showCertOverlay(tier) {
     document.getElementById('cert-title').style.color = '';
     document.getElementById('congrats-text').style.color = '';
     document.querySelector('.cert-globe').style.display = '';
-    document.getElementById('cert-badges-row').style.display = '';
     document.getElementById('rejected-stamp-wrap').style.display = 'none';
-    updateBadgeWidgets(tier); updateCertPlanList();
-    playCelebrationSound(tier); if (tier === 'gold') launchConfetti(tier);
+    updateCertPlanList();
+    playCelebrationSound();
+    launchConfetti();
 }
 function showRejectionOverlay() {
     const ov = document.getElementById('congrats-overlay');
@@ -368,7 +341,6 @@ function showRejectionOverlay() {
     document.getElementById('cert-title').style.color = '#cc1111';
     document.getElementById('congrats-text').style.color = '#cc1111';
     document.querySelector('.cert-globe').style.display = 'none';
-    document.getElementById('cert-badges-row').style.display = 'none';
     document.getElementById('rejected-stamp-wrap').style.display = 'flex';
     const stamp = document.querySelector('.rejected-stamp');
     if (stamp) stamp.textContent = 'REJECTED';
@@ -388,11 +360,11 @@ function fadeRevealOut(targetOpacity, duration) {
 }
 function submitPlan() {
     if (!state.applied.length || state.budget < 0) return;
-    const tier = getBadgeTier(state.co2);
+    const accepted = isPlanAccepted(state.co2);
     showRevealOverlay();
-    if (tier) {
+    if (accepted) {
         playDrumRoll();
-        setTimeout(() => { showCertOverlay(tier); fadeRevealOut(0, 800); }, 1050);
+        setTimeout(() => { showCertOverlay(); fadeRevealOut(0, 800); }, 1050);
     } else {
         showRejectionOverlay();
         fadeRevealOut(0, 380);
@@ -430,8 +402,8 @@ function initPlanner(budget) {
     state.co2        = 0;
     state.applied    = [];
     state.goalEverMet = false;
-    state.badgeTiers = computeBadgeTiers(budget);
-    config.goal      = state.badgeTiers.bronze;
+    state.maxImpact = computeMaxImpact(budget);
+    config.goal      = state.maxImpact;
     document.getElementById('setup-overlay').style.display = 'none';
     apiSaveBudget(config.budget, config.goal);
     updateStats();
@@ -441,8 +413,8 @@ function initPlanner(budget) {
 
 function restoreFromBackend(savedPlan) {
     config.budget    = savedPlan.budget;
-    state.badgeTiers = computeBadgeTiers(config.budget);
-    config.goal      = state.badgeTiers.bronze;
+    state.maxImpact = computeMaxImpact(config.budget);
+    config.goal      = state.maxImpact;
     const applied = (savedPlan.applied || []).map(id => itemsById[id]).filter(Boolean);
     state.budget  = config.budget - applied.reduce((s, i) => s + i.cost, 0);
     state.co2     = Math.round(applied.reduce((s, i) => s + i.impact, 0) * 100) / 100;
