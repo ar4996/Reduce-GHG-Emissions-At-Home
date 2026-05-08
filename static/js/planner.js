@@ -426,12 +426,12 @@ function updateStats() {
 // ── Init from housing selection ───────────────────────────────
 function initPlanner(budget) {
     config.budget    = budget;
-    config.goal      = parseFloat(computeGoal(budget).toFixed(1));
     state.budget     = budget;
     state.co2        = 0;
     state.applied    = [];
     state.goalEverMet = false;
     state.badgeTiers = computeBadgeTiers(budget);
+    config.goal      = state.badgeTiers.bronze;
     document.getElementById('setup-overlay').style.display = 'none';
     apiSaveBudget(config.budget, config.goal);
     updateStats();
@@ -441,8 +441,8 @@ function initPlanner(budget) {
 
 function restoreFromBackend(savedPlan) {
     config.budget    = savedPlan.budget;
-    config.goal      = parseFloat((savedPlan.goal || 0).toFixed(1));
     state.badgeTiers = computeBadgeTiers(config.budget);
+    config.goal      = state.badgeTiers.bronze;
     const applied = (savedPlan.applied || []).map(id => itemsById[id]).filter(Boolean);
     state.budget  = config.budget - applied.reduce((s, i) => s + i.cost, 0);
     state.co2     = Math.round(applied.reduce((s, i) => s + i.impact, 0) * 100) / 100;
