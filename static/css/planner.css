@@ -156,7 +156,7 @@ body.page-planner {
     width: 100%; flex: 1; min-height: 320px; padding: 18px;
     display: flex; flex-wrap: wrap; align-content: flex-start; gap: 10px;
     overflow-y: auto; position: relative;
-    background: #f0f0f0;
+    background: rgba(238, 241, 243, 0.96);
     border: 3px dashed rgba(116,27,71,0.55); border-radius: 28px; box-sizing: border-box;
     transition: border-color 0.2s;
 }
