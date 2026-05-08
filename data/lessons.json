@@ -13,7 +13,7 @@
         "hotspot": {
           "left": "77%",
           "top": "13%",
-          "width": "20%",
+          "width": "22%",
           "height": "75%"
         }
       },
@@ -24,9 +24,9 @@
         "description": "Devices draw power even when \"off\"",
         "impact": "0.15",
         "hotspot": {
-          "left": "15%",
+          "left": "10%",
           "top": "42%",
-          "width": "18%",
+          "width": "21%",
           "height": "15%"
         }
       },
@@ -37,10 +37,10 @@
         "description": "Switching from a gas cooktop to an induction cooktop eliminates gas combustion in the kitchen.",
         "impact": "0.64",
         "hotspot": {
-          "left": "30%",
+          "left": "31%",
           "top": "50%",
-          "width": "24%",
-          "height": "13%"
+          "width": "20%",
+          "height": "16%"
         }
       }
     ]
@@ -57,9 +57,9 @@
         "description": "Adjusts automatically when you're away or asleep",
         "impact": "0.50",
         "hotspot": {
-          "left": "2%",
+          "left": "1%",
           "top": "34%",
-          "width": "7%",
+          "width": "8%",
           "height": "9%"
         }
       },
@@ -70,9 +70,9 @@
         "description": "Reduce heat transfer through glass",
         "impact": "0.25",
         "hotspot": {
-          "left": "31%",
+          "left": "29%",
           "top": "12%",
-          "width": "34%",
+          "width": "36%",
           "height": "38%"
         }
       },
@@ -86,7 +86,7 @@
           "left": "43%",
           "top": "0%",
           "width": "13%",
-          "height": "17%"
+          "height": "19%"
         }
       }
     ]
@@ -104,7 +104,7 @@
         "impact": "0.90",
         "hotspot": {
           "left": "51%",
-          "top": "6%",
+          "top": "8%",
           "width": "16%",
           "height": "34%"
         }
@@ -117,7 +117,7 @@
         "impact": "0.15",
         "hotspot": {
           "left": "73%",
-          "top": "15%",
+          "top": "12%",
           "width": "14%",
           "height": "13%"
         }
@@ -130,9 +130,9 @@
         "impact": "0.10",
         "hotspot": {
           "left": "80%",
-          "top": "45%",
+          "top": "44%",
           "width": "10%",
-          "height": "20%"
+          "height": "17%"
         }
       }
     ]
@@ -150,9 +150,9 @@
         "impact": "0.10",
         "hotspot": {
           "left": "25%",
-          "top": "48%",
-          "width": "22%",
-          "height": "38%"
+          "top": "54%",
+          "width": "19%",
+          "height": "34%"
         }
       },
       {
@@ -162,10 +162,10 @@
         "description": "A clogged filter makes the dryer run longer",
         "impact": "0.05",
         "hotspot": {
-          "left": "64%",
-          "top": "42%",
+          "left": "63%",
+          "top": "44%",
           "width": "7%",
-          "height": "11%"
+          "height": "9%"
         }
       },
       {
@@ -175,9 +175,9 @@
         "description": "Dryers are among the highest-energy appliances",
         "impact": "1.00",
         "hotspot": {
-          "left": "49%",
+          "left": "45%",
           "top": "54%",
-          "width": "21%",
+          "width": "24%",
           "height": "34%"
         }
       }
