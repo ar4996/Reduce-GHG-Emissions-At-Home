@@ -10,24 +10,17 @@
 <!-- ══ SETUP OVERLAY — housing type selection ══════════════════ -->
 <div id="setup-overlay" class="overlay">
 <section class="planner-setup-card">
-  <h2 style="color:#4d6d42;font-size:1.4rem;">Home Setup</h2>
-  <h1 style="color:#2d5a27;font-weight:800;margin-bottom:12px;">Choose Your Home Type</h1>
+  <h1 style="color:#2d5a27;font-weight:800;margin-bottom:12px;">Sustainable Home Planner</h1>
   <p style="color:#50645c;font-size:1.05rem;margin-bottom:28px;">
     Select your housing type to set your improvement budget:
   </p>
 
   <div class="housing-grid">
-    <button class="housing-option" data-budget="200">
+    <button class="housing-option" data-budget="250">
       <span class="housing-icon">🏢</span>
       <span class="housing-name">Studio Apartment</span>
-      <span class="housing-budget">$200 budget</span>
+      <span class="housing-budget">$250 budget</span>
       <span class="housing-desc">Behavioral changes only</span>
-    </button>
-    <button class="housing-option" data-budget="800">
-      <span class="housing-icon">🏬</span>
-      <span class="housing-name">City Apartment</span>
-      <span class="housing-budget">$800 budget</span>
-      <span class="housing-desc">A few small purchases</span>
     </button>
     <button class="housing-option" data-budget="1500">
       <span class="housing-icon">🏡</span>
@@ -35,10 +28,10 @@
       <span class="housing-budget">$1,500 budget</span>
       <span class="housing-desc">Moderate upgrades</span>
     </button>
-    <button class="housing-option" data-budget="3000">
+    <button class="housing-option" data-budget="3250">
       <span class="housing-icon">🏠</span>
       <span class="housing-name">Large Family Home</span>
-      <span class="housing-budget">$3,000 budget</span>
+      <span class="housing-budget">$3,250 budget</span>
       <span class="housing-desc">Full range of improvements</span>
     </button>
   </div>
@@ -196,7 +189,7 @@
         </div>
       </div>
 
-      <div id="drop-zone" style="background-color: {{ rooms[0].color }};">
+      <div id="drop-zone">
         <div id="drag-hint" style="display:flex;">
           <span class="drag-hand">🫳</span>
           <div class="drag-text-label">Drag change cards here</div>
@@ -225,8 +218,7 @@
     window.INITIAL_STATE = {
         plan:  {{ plan  | tojson }},
         items: {{ items | tojson }},
-        rooms: {{ rooms | tojson }},
-        forceSetup: {{ force_setup | default(false) | tojson }}
+        rooms: {{ rooms | tojson }}
     };
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

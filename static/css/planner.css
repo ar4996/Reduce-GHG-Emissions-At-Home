@@ -31,7 +31,7 @@ body.page-planner {
     background: transparent; text-align: center;
 }
 .housing-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
     margin-bottom: 28px;
 }
 .housing-option {
@@ -56,12 +56,19 @@ body.page-planner {
 
 /* ── Top nav bar ───────────────────────────────────────────── */
 .planner-topnav {
-    flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 24px; background: rgba(238,241,243,0.96); backdrop-filter: blur(14px);
+    flex-shrink: 0; position: relative; display: flex; align-items: center;
+    justify-content: space-between; padding: 10px 24px;
+    background: rgba(238,241,243,0.96); backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(45,52,54,0.08); z-index: 1500;
 }
-.topnav-left, .topnav-right { display: flex; gap: 10px; }
-.topnav-brand { font-size: 1.1rem; font-weight: 900; color: #2d5a27; letter-spacing: 0.04em; text-transform: uppercase; }
+.topnav-left  { display: flex; gap: 10px; }
+.topnav-right { display: flex; gap: 10px; }
+.topnav-brand {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: 1.1rem; font-weight: 900; color: #2d5a27;
+    letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+    pointer-events: none;
+}
 .topnav-btn {
     display: inline-flex; align-items: center; justify-content: center;
     padding: 9px 16px; border: 1.5px solid #d5e6cd; border-radius: 999px;
