@@ -227,8 +227,12 @@ def quiz_binary():
 
 
 def planner_view_context(force_setup=False):
+    plan = {"budget": None, "goal": None, "applied": []}
+    if not force_setup:
+        plan = load_user_data().get("plan") or {}
+
     return {
-        "plan": load_user_data().get("plan") or {},
+        "plan": plan,
         "items": load_json("planner_items.json"),
         "rooms": load_json("rooms.json"),
         "force_setup": force_setup,
@@ -259,7 +263,7 @@ def api_budget():
     plan = user_data.get("plan") or {"applied": []}
     plan["budget"] = budget
     plan["goal"] = goal
-    plan.setdefault("applied", [])
+    plan["applied"] = []
     user_data["plan"] = plan
     save_user_data(user_data)
     return jsonify({"ok": True})

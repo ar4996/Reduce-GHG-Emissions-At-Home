@@ -196,9 +196,10 @@
 {% block scripts %}
 <script>
     window.INITIAL_STATE = {
-        plan:  {{ plan  | tojson }},
+        plan: {{ plan | tojson }},
         items: {{ items | tojson }},
-        rooms: {{ rooms | tojson }}
+        rooms: {{ rooms | tojson }},
+        forceSetup: {{ force_setup | tojson }}
     };
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

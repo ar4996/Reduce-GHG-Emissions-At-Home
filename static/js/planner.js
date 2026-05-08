@@ -445,6 +445,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const savedPlan = window.INITIAL_STATE.plan || {};
+    const forceSetup = Boolean(window.INITIAL_STATE.forceSetup);
+
+    if (forceSetup) {
+        document.getElementById('setup-overlay').style.display = 'flex';
+        document.getElementById('congrats-overlay').style.display = 'none';
+        return;
+    }
+
     if (savedPlan.budget) {
         restoreFromBackend(savedPlan);
         if (!(savedPlan.applied && savedPlan.applied.length)) startDragGuide();
