@@ -45,10 +45,19 @@
 <!-- ══ CERT / REJECT OVERLAY ══════════════════════════════════ -->
 <div id="congrats-overlay" class="overlay cert-overlay" style="display:none">
   <div class="cert-footer">
-    <button id="email-cert-btn" class="nav-btn active congrats-btn">📄 Download Certificate (PDF)</button>
-    <button id="restart-budget-btn" class="nav-btn congrats-btn">⟲ Try Again</button>
-    <button id="reject-try-again-btn" class="nav-btn congrats-btn reject-try-again" style="display:none">⟲ Try Again</button>
-  </div>
+  <button id="email-cert-btn" class="nav-btn active congrats-btn">📄 Download Certificate (PDF)</button>
+
+  <button id="restart-budget-btn" class="nav-btn congrats-btn">⟲ Try Again</button>
+  <button id="reject-try-again-btn" class="nav-btn congrats-btn reject-try-again" style="display:none">⟲ Try Again</button>
+
+  <a href="{{ url_for('home') }}" class="nav-btn congrats-btn planner-footer-link">
+    Home
+  </a>
+
+  <a href="{{ url_for('learn_index') }}" class="nav-btn congrats-btn planner-footer-link">
+    Lesson
+  </a>
+</div>
 
   <div class="cert-card">
     <div class="cert-hero">

@@ -61,6 +61,13 @@ body.page-planner {
     background: rgba(238,241,243,0.96); backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(45,52,54,0.08); z-index: 1500;
 }
+.planner-footer-link {
+    text-decoration: none;
+}
+
+.planner-footer-link:hover {
+    text-decoration: none;
+}
 .topnav-left  { flex: 1; display: flex; gap: 10px; justify-content: flex-start; }
 .topnav-right { flex: 1; display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
 .topnav-brand {
