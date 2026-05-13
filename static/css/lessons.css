@@ -206,7 +206,7 @@
 .opportunity-table {
     width: 100%;
     table-layout: fixed;
-    font-size: 16px;
+    font-size: inherit;
     line-height: 1.35;
     background-color: #ffffff;
     border: 1px solid var(--border-gray);
