@@ -3,10 +3,10 @@
 An interactive Flask app for a UI Design final project that teaches users how to reduce household emissions, checks understanding with a short quiz, and then lets them build a budget-aware emissions reduction plan.
 
 ## Team Members
-- Victor Edward Bula
-- Avishek Rao
-- Dabeet Sharma
-- Ankit Mohapatra
+- Victor Edward Bula (GitHub username: sachmosaurus)
+- Avishek Rao (GitHub username: avishekrao)
+- Dabeet Sharma (GitHub username: dabeet-sharma)
+- Ankit Mohapatra (GitHub username: unkith)
 
 ## Current App Flow
 The current prototype is a two-stage experience:
