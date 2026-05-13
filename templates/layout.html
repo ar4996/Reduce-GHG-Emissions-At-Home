@@ -20,7 +20,7 @@
     <div class="site-nav-inner">
       <div class="site-nav-links">
         <a href="{{ url_for('home') }}" class="site-nav-link{% if request.endpoint == 'home' %} is-active{% endif %}">Home</a>
-        <a href="{{ url_for('learn_index') }}" class="site-nav-link{% if request.endpoint in ['learn_index', 'lesson_page', 'lesson_welcome'] %} is-active{% endif %}">Lesson</a>
+        <a href="{{ url_for('learn_home') }}" class="site-nav-link{% if request.endpoint in ['learn_home', 'lesson_page', 'lesson_welcome'] %} is-active{% endif %}">Lesson</a>
         <a href="{{ url_for('quiz_setup') }}" class="site-nav-link{% if request.endpoint in ['quiz_binary', 'quiz_planner', 'quiz_setup'] %} is-active{% endif %}">Test Yourself</a>
       </div>
     </div>

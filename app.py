@@ -174,14 +174,14 @@ def home():
     return render_template("welcome.html")
 
 
-@app.route('/learn/index')
-def learn_index():
+@app.route('/learn')
+def learn_home():
     return render_template('lesson-welcome.html')
 
 
 @app.route('/lesson-welcome')
 def lesson_welcome():
-    return redirect(url_for('learn_index'))
+    return redirect(url_for('learn_home'))
 
 
 @app.route('/learn/<int:index>')
@@ -217,7 +217,7 @@ def start():
     state = _empty_state()
     state["started_at"] = datetime.now().isoformat()
     save_user_data(state)
-    return redirect(url_for('learn_index'))
+    return redirect(url_for('learn_home'))
 
 
 # ADDED FOR BINARY QUIZ — serves templates/binary.html
