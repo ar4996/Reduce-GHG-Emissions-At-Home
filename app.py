@@ -12,7 +12,7 @@ Page routes:
     GET  /                        Home (Start button)
     POST /start                   Reset user data, redirect to /learn/1
     GET  /learn/<int:lesson_num>  Learning placeholder (owned by Avi/Ankit)
-    GET  /quiz/1                  Planner SPA — this is the quiz
+    GET  /planner                 Planner SPA
 
 JSON API (backend persistence per spec #4):
     POST   /api/budget            Save budget + computed goal
@@ -29,7 +29,6 @@ from flask import (
 )
 import json
 import os
-import random
 from datetime import datetime
 from threading import RLock
 
@@ -121,17 +120,6 @@ def items_by_id():
     return {it["id"]: it for it in load_json("planner_items.json")}
 
 
-# ADDED FOR BINARY QUIZ — strips correct answers before sending to client
-def binary_questions_for_client():
-    client_questions = []
-    for q in load_json("binary_questions.json"):
-        client_question = {k: v for k, v in q.items() if k != "correct"}
-        options = list(q.get("options") or [])
-        random.shuffle(options)
-        client_question["options"] = options
-        client_questions.append(client_question)
-    return client_questions
-
 
 def build_plan_summary(user_data):
     """Plain-text plan summary for /api/plan/summary (debugging / inspection)."""
@@ -220,11 +208,6 @@ def start():
     return redirect(url_for('learn_home'))
 
 
-# ADDED FOR BINARY QUIZ — serves templates/binary.html
-@app.route("/quiz/binary")
-def quiz_binary():
-    return render_template("binary.html", questions=binary_questions_for_client())
-
 
 def planner_view_context(force_setup=False):
     plan = {"budget": None, "goal": None, "applied": []}
@@ -239,14 +222,9 @@ def planner_view_context(force_setup=False):
     }
 
 
-@app.route("/quiz/setup")
+@app.route("/planner")
 def quiz_setup():
     return render_template("planner.html", **planner_view_context(force_setup=True))
-
-
-@app.route("/quiz/1")
-def quiz_planner():
-    return render_template("planner.html", **planner_view_context())
 
 
 # ==================== JSON API ====================
@@ -300,30 +278,6 @@ def api_plan_summary():
     return Response(build_plan_summary(load_user_data()), mimetype="text/plain")
 
 
-# ADDED FOR BINARY QUIZ — server-side all-or-nothing correctness check
-@app.route("/api/binary", methods=["POST"])
-def api_binary():
-    payload = request.get_json(silent=True) or {}
-    submission = payload.get("submission")
-    if not isinstance(submission, list):
-        abort(400, "submission (list) required")
-
-    answer_key = {q["id"]: q["correct"] for q in load_json("binary_questions.json")}
-    submitted = {s.get("question_id"): s.get("answer") for s in submission}
-
-    all_correct = (
-        len(submitted) == len(answer_key)
-        and all(answer_key.get(qid) == ans for qid, ans in submitted.items())
-    )
-
-    user_data = load_user_data()
-    user_data["binary"] = {
-        "submitted_at": datetime.now().isoformat(),
-        "submission": submission,
-        "all_correct": all_correct,
-    }
-    save_user_data(user_data)
-    return jsonify({"all_correct": all_correct})
 
 
 if __name__ == "__main__":

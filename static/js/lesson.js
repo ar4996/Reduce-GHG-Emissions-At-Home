@@ -67,7 +67,7 @@ $(document).ready(function () {
         const nextIndex = $(this).data("next-index");
 
         if (nextIndex === null || nextIndex === undefined || nextIndex === "None") {
-            window.location.href = "/quiz/setup";
+            window.location.href = "/planner";
         } else {
             window.location.href = "/learn/" + nextIndex;
         }
